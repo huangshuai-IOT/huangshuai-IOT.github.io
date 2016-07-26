@@ -12,7 +12,7 @@ timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://huangshuai-iot.github.io/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -68,8 +68,10 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
-
+  type: git
+  repo: https://github.com/huangshuai-IOT/huangshuai-IOT.github.io.git
+  branch: master
+  
 # 多说
 duoshuo_shortname: huangshuai-iot
 
