@@ -3,8 +3,8 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
+title: 黄帅的博客
+subtitle: Just I decided.
 description: 说我能做的，做我说过的。
 author: 黄帅
 language: zh-Hans
@@ -71,9 +71,11 @@ deploy:
   type: git
   repo: https://github.com/huangshuai-IOT/huangshuai-IOT.github.io.git
   branch: master
-  
+
 # 多说
 duoshuo_shortname: huangshuai-iot
 
 # 百度
 baidu_analytics: de241358bbb90d3e97f1f8486e6d5b41
+# Swiftype Search Key
+swiftype_key: yQ1raifaH1s316jSamV8

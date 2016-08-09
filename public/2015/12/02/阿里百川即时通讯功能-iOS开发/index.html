@@ -1,0 +1,830 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Swift,iOS,阿里百川,即时通讯," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言在iOS-webApp客户端开发小记 的最后，我提到我们公司的产品需要在现有产品结构中加入即时通讯功能。经过对现有第三方即时通讯产品的试用和分析，我们最终选择了阿里百川提供的及时通讯功能。
+项目需求1.学生与老师之间要能沟通（单聊）
+2.在同一门课程中，老师与学生们在一个聊天群里（群聊）
+3.学生和老师要可以和我们公司的技术支持人员能沟通（客服）
+技术选型前期调研了容联云、LeanCloud、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS:阿里百川即时通讯功能">
+<meta property="og:url" content="https://huangshuai-iot.github.io/2015/12/02/阿里百川即时通讯功能-iOS开发/index.html">
+<meta property="og:site_name" content="黄帅的博客">
+<meta property="og:description" content="前言在iOS-webApp客户端开发小记 的最后，我提到我们公司的产品需要在现有产品结构中加入即时通讯功能。经过对现有第三方即时通讯产品的试用和分析，我们最终选择了阿里百川提供的及时通讯功能。
+项目需求1.学生与老师之间要能沟通（单聊）
+2.在同一门课程中，老师与学生们在一个聊天群里（群聊）
+3.学生和老师要可以和我们公司的技术支持人员能沟通（客服）
+技术选型前期调研了容联云、LeanCloud、">
+<meta property="og:updated_time" content="2016-08-09T08:39:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS:阿里百川即时通讯功能">
+<meta name="twitter:description" content="前言在iOS-webApp客户端开发小记 的最后，我提到我们公司的产品需要在现有产品结构中加入即时通讯功能。经过对现有第三方即时通讯产品的试用和分析，我们最终选择了阿里百川提供的及时通讯功能。
+项目需求1.学生与老师之间要能沟通（单聊）
+2.在同一门课程中，老师与学生们在一个聊天群里（群聊）
+3.学生和老师要可以和我们公司的技术支持人员能沟通（客服）
+技术选型前期调研了容联云、LeanCloud、">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://huangshuai-iot.github.io/2015/12/02/阿里百川即时通讯功能-iOS开发/"/>
+
+  <title> iOS:阿里百川即时通讯功能 | 黄帅的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?de241358bbb90d3e97f1f8486e6d5b41";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s6.cnzz.com/stat.php?id=1259995403&web_id=1259995403" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">黄帅的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Just I decided.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'yQ1raifaH1s316jSamV8','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS:阿里百川即时通讯功能
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-02T20:55:15+08:00" content="2015-12-02">
+              2015-12-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/02/阿里百川即时通讯功能-iOS开发/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/02/阿里百川即时通讯功能-iOS开发/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在<a href="../../../../2015/11/06/iOS-webApp客户端开发-小记/">iOS-webApp客户端开发小记</a> 的最后，我提到我们公司的产品需要在现有产品结构中加入即时通讯功能。经过对现有第三方即时通讯产品的试用和分析，我们最终选择了阿里百川提供的及时通讯功能。</p>
+<h2 id="项目需求"><a href="#项目需求" class="headerlink" title="项目需求"></a>项目需求</h2><p>1.学生与老师之间要能沟通（单聊）</p>
+<p>2.在同一门课程中，老师与学生们在一个聊天群里（群聊）</p>
+<p>3.学生和老师要可以和我们公司的技术支持人员能沟通（客服）</p>
+<h2 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h2><p>前期调研了容联云、LeanCloud、环信、Bmob、阿里百川、友盟等一些做即时通信服务的第三方服务。首先我们需要其提供iOS、Android、h5、Java的SDK，接着试用了他们的Demo，然后看他们的开发文档是否详尽（公司与公司之间的开发文档真的差距好大），最后看他们的技术实力与公司实力（总不能比我们的产品先倒闭吧，哈哈）。</p>
+<p>最后选中了阿里百川，首先其是阿里无线事业部下属的，他们的技术实力和公司实力不用怀疑。其实我第一眼看中的还是他们的开发文档，非常的完善，其次是这个项目应该开始不久，他们的技术支持非常给力，一线的开发人员在充当客服，在开发的时候还跟他们打了好几通电话，技术支持非常的棒。</p>
+<h2 id="项目开发"><a href="#项目开发" class="headerlink" title="项目开发"></a>项目开发</h2><p>这里讲的是iOS端如何整合阿里百川的SDK。我采用的是Swift开发，而阿里百川提供的官方文档是针对Objective-C项目的，所以在此记录一下Swift项目是怎样整合的。下面主要介绍快速集成和APNS推送，相信通过这两点，就会对如何在Swift中调用IMSDK相关功能有个了解，那么其他功能调用也会容易实现。</p>
+<h3 id="1-快速集成"><a href="#1-快速集成" class="headerlink" title="1.快速集成"></a>1.快速集成</h3><h4 id="Step1-Step5-引入IMSDK"><a href="#Step1-Step5-引入IMSDK" class="headerlink" title="Step1-Step5 引入IMSDK"></a>Step1-Step5 引入IMSDK</h4><p>按照阿里百川的即时通信服务的快速集成文档，完成Step1-Step5都是没有什么问题的。百川提供了非常好的胶水代码（将我们的App和IMSDK粘合起来的中间代码），其中包含对IMSDK主流程接口的调用代码，例如初始化、登录准备、登录、注销、打开会话列表、打开聊天页面。<br>通过调用、学习胶水代码可以为我们后期自己直接操作IMSDK来定制功能提供方向。</p>
+<p>在拖入胶水代码后就是初始化IMSDK，由于胶水代码是OC文件，在Swift项目中需要建立桥接头文件，这里可以偷个懒，直接在项目中新建一个OC文件，然后会自动生成一个桥接头文件，然后再把刚才这个OC文件删除即可，这样可以省去在项目中配置桥接头文件这一步。接着，在桥接头文件中，引入胶水代码的头文件：<code>#import &quot;SPKitExample.h&quot;</code></p>
+<h4 id="Step6-初始化IMSDK"><a href="#Step6-初始化IMSDK" class="headerlink" title="Step6 初始化IMSDK"></a>Step6 初始化IMSDK</h4><p>在AppDelegate.swift调用基础入口胶水函数：<code>callThisInDidFinishLaunching</code></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">application</span><span class="params">(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="comment">// Override point for customization after application launch.</span></div><div class="line">    <span class="comment">//函数中初始化IMSDK</span></div><div class="line">        <span class="type">SPKitExample</span>.sharedInstance().callThisInDidFinishLaunching()</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意：要到SPKitExample.m里exampleInit登录函数这把key换成我们自己申请的AppKey</p>
+<h4 id="Step7-登录IMSDK"><a href="#Step7-登录IMSDK" class="headerlink" title="Step7 登录IMSDK"></a>Step7 登录IMSDK</h4><p>在用户登录我们自己App的账号成功后，调用基础入口胶水函数callThisAfterISVAccountLoginSuccessWithYWLoginId，使其登录IMSDK。在应用里，我用Swift稍微封装了一下登录的代码:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">loginBaichuan</span><span class="params">(userid:String,password:String)</span></span> &#123;</div><div class="line">    <span class="comment">//应用登陆成功后，调用SDK</span></div><div class="line">        <span class="type">SPKitExample</span>.sharedInstance().callThisAfterISVAccountLoginSuccessWithYWLoginId(userid, passWord:password, preloginedBlock: <span class="literal">nil</span>, successBlock: &#123;() -&gt; <span class="type">Void</span> <span class="keyword">in</span> (</div><div class="line"><span class="built_in">print</span>(<span class="string">"哈哈哈，登录成功！"</span>))&#125;, failedBlock: <span class="literal">nil</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意：在用户退出我们的App之后，还需要使其退出IMSDK，不然App在后台，用户没有登录我们的账号体系，但是还会受到来自即时通讯功能的新消息推送。这是退出的代码：</p>
+<p><code>SPKitExample.sharedInstance().callThisBeforeISVAccountLogout()</code></p>
+<h4 id="Step8-打开会话列表和聊天页面"><a href="#Step8-打开会话列表和聊天页面" class="headerlink" title="Step8 打开会话列表和聊天页面"></a>Step8 打开会话列表和聊天页面</h4><ol>
+<li><p>打开会话列表</p>
+<p> 我们app采用的是UINavigationController方式，所以打开会话列表的代码如下：</p>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">openTalkList</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">let</span> result:<span class="type">YWConversationListViewController</span> = <span class="type">SPKitExample</span>.sharedInstance().ywIMKit.makeConversationListViewController()</div><div class="line">    result.title = <span class="string">"最近联系人"</span></div><div class="line">    result.setDidSelectItemBlock &#123; (<span class="type">YWConversation</span>) -&gt; <span class="type">Void</span> <span class="keyword">in</span> (</div><div class="line">        <span class="type">SPKitExample</span>.sharedInstance().exampleOpenConversationViewControllerWithConversation(<span class="type">YWConversation</span>, fromNavigationController: <span class="keyword">self</span>.navigationController))</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">self</span>.navigationController?.navigationBarHidden = <span class="literal">false</span></div><div class="line">    <span class="keyword">self</span>.navigationController?.pushViewController(result, animated: <span class="literal">true</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>打开单聊页面</p>
+<p> 我直接调用是胶水函数里面的<code>exampleOpenConversationViewControllerWithPerson</code>方法</p>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">talk2Teacher</span><span class="params">(teacherId:String)</span></span> &#123; </div><div class="line">    <span class="type">SPKitExample</span>.sharedInstance().exampleOpenConversationViewControllerWithPerson(<span class="type">YWPerson</span>(personId:teacherId),fromNavigationController:<span class="keyword">self</span>.navigationController)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>打开群聊界面</p>
+<p> 阿里百川的文档里面写的是调用胶水函数里面的<code>exampleOpenConversationViewControllerWithTribe</code>方法，但是该方法要求传入一个<code>YWTribe</code>类型的群组聊天变量。由于阿里百川即时通讯的架构是自建账号体系，所以我们的App只能从服务器处获取当前用户所在群的群ID，但是胶水函数里面没有现成的通过群ID打开群聊的功能，所以我通过看胶水代码以及IMSDK的群服务相关的头文件<code>IYWTribeService.h</code>，找到<code>IMCore.getTribeService().requestTribeFromServer</code>函数，它可以返回一个<code>YWTribe</code>类型的群变量。所以我先通过该函数根据群ID查询到群信息，并且根据YWTribe类型的群变量再调用<code>exampleOpenConversationViewControllerWithTribe</code>方法。</p>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">talk2Group</span><span class="params">(groudId:String)</span></span> &#123; </div><div class="line">    <span class="type">SPKitExample</span>.sharedInstance().ywIMKit.<span class="type">IMCore</span>.getTribeService().requestTribeFromServer(groudId, completion: &#123; (<span class="type">YWTribe</span>, <span class="type">NSError</span>) -&gt; <span class="type">Void</span> <span class="keyword">in</span> <span class="type">SPKitExample</span>.sharedInstance().exampleOpenConversationViewControllerWithTribe(<span class="type">YWTribe</span>,fromNavigationController:<span class="keyword">self</span>.navigationController))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 我觉得，胶水函数里既然有根据对方的用户ID来打开单聊界面的封装函数，就应该有这样一个根据群ID来打开群聊界面的封装函数。当时，由于对IMSDK结构的不熟悉，这个功能我还花了一些时间来找接口实现。</p>
+</li>
+</ol>
+<h3 id="2-APNS推送"><a href="#2-APNS推送" class="headerlink" title="2.APNS推送"></a>2.APNS推送</h3><p>我在另外一篇博文里介绍了在iOS9-Swift2-Xcode7环境下的APNS推送相关的内容，这里介绍一下具体的在阿里百川环境下的实现。</p>
+<h4 id="Step1-制作并上传证书"><a href="#Step1-制作并上传证书" class="headerlink" title="Step1 制作并上传证书"></a>Step1 制作并上传证书</h4><p>申请推送证书这个百度有很多教程，这里不在赘述了，反正要注意阿里百川的后台需要的生产环境的证书。</p>
+<h4 id="Step2-申请DeviceToken"><a href="#Step2-申请DeviceToken" class="headerlink" title="Step2 申请DeviceToken"></a>Step2 申请DeviceToken</h4><p>首先需要在<code>AppDelegate.swift</code>文件的<code>func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -&gt; Bool</code>函数里添加以下两句来向Apple的APNS服务器注册申请DeviceToken，这里可以设置新消息推送来App的展现形式，有Sound、Alert、Badge三种。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">UIApplication</span>.sharedApplication().registerUserNotificationSettings(<span class="type">UIUserNotificationSettings</span>(forTypes: [<span class="type">UIUserNotificationType</span>.<span class="type">Sound</span> , <span class="type">UIUserNotificationType</span>.<span class="type">Alert</span> , <span class="type">UIUserNotificationType</span>.<span class="type">Badge</span>], categories: <span class="literal">nil</span>))</div><div class="line"><span class="type">UIApplication</span>.sharedApplication().registerForRemoteNotifications()</div></pre></td></tr></table></figure>
+<p>接着添加注册申请DeviceToken成功的回调函数：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">application</span><span class="params">(application:UIApplication,didRegisterForRemoteNotificationsWithDeviceToken deviceToken:NSData)</span></span> &#123;</div><div class="line">    <span class="keyword">let</span> token:<span class="type">String</span> = deviceToken.description.stringByTrimmingCharactersInSet(<span class="type">NSCharacterSet</span>(charactersInString: <span class="string">"&lt;&gt;"</span>))</div><div class="line">    <span class="built_in">print</span>(<span class="string">"token==<span class="subst">\(token)</span>"</span>)</div><div class="line">    <span class="comment">//将token发送到服务器</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意：IMSDK会自动得到该DeviceToken，你无须手动传给IMSDK</p>
+<h4 id="Step3-处理APNS消息"><a href="#Step3-处理APNS消息" class="headerlink" title="Step3 处理APNS消息"></a>Step3 处理APNS消息</h4><p>由于初始化SDK的时候就调用了<code>SPKitExample.sharedInstance().callThisInDidFinishLaunching()</code>函数，在<code>callThisInDidFinishLaunching</code>里面已经调用了<code>exampleHandleAPNSPush()</code>,所以就不用像文档里面说的那样再在<code>AppDelegate didFinishLoadingWithOptions</code>调用<code>IYWPushService</code>的<code>setHandlePushBlockV3:</code>方法。</p>
+<h4 id="Step4-Xcode设置为Distribution证书的AdHoc-Provision打包"><a href="#Step4-Xcode设置为Distribution证书的AdHoc-Provision打包" class="headerlink" title="Step4 Xcode设置为Distribution证书的AdHoc Provision打包"></a>Step4 Xcode设置为Distribution证书的AdHoc Provision打包</h4><p>由于阿里百川使用的生产环节下的推送证书，而我们又不能等到应用上线到AppStore后再测试，所以这里Provisioning Profiles使用AdHoc Provision，如何申请百度也有很多教程，这里就不在赘述。</p>
+<p>这里讲一下Xcode7设置打包环境的过程：</p>
+<p>首先设置Project下的Code Signing：<br>Code Signing Identity 全部设置为Distribution证书<br>Provisioning Profiles设置为申请的Distribution-AdHoc Provision证书</p>
+<p>再设置Target下的Code Signing：<br>Code Signing Identity 全部设置为Automatic证书<br>Provisioning Profiles设置为申请的Distribution-AdHoc Provision证书</p>
+<p>在这里我遇到很多坑，经过不断的测试才发现这样的设置可以正常使用。这里我有一个疑问，就是我在第一次使用阿里百川APNS推送时，对证书不是很了解，都没有申请Distribution-AdHoc Provision，糊里糊涂就实现了推送，但是后来不知道自己怎么改动了设置，APNS就不能推送到app了。后期我学习了苹果的证书系统，申请了Distribution-AdHoc Provision证书，才又实现了APNS推送，关于第一次是如何实现功能的，我到现在都没弄明白。</p>
+<h4 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h4><p>如果App在后台收不到推送的消息，请参考我那篇博文以及百川的文档，里面有教我们如何利用APNS调试工具通过使用我们的证书，手动Push一条消息到我们的App。通过此方法检测推送证书和DeviceToken是否正确。如果手动推送可以，则说明App证书打包以及申请DeviceToken都是没有问题的，此时应该检测一下提交到阿里百川后台的证书有没有问题。</p>
+<h2 id="项目总结"><a href="#项目总结" class="headerlink" title="项目总结"></a>项目总结</h2><p>即时通讯功能虽然只是我开发的app中的一个功能，但通过在项目中引用阿里百川即时通讯服务，让我懂了一点如何在Swift项目调用OC-SDK，这为我调用更多第三方OC语言SDK提供了基础。</p>
+<p>在这里非常感谢阿里百川-即时通讯的技术支持在我开发过程中提供的帮助！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/wechat-reward-image.JPG" alt="黄帅 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/alipay-reward-image.JPG" alt="黄帅 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag">#Swift</a>
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+            <a href="/tags/阿里百川/" rel="tag">#阿里百川</a>
+          
+            <a href="/tags/即时通讯/" rel="tag">#即时通讯</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/11/05/iOS-webApp客户端开发小记/" rel="next" title="iOS:webApp客户端开发小记">
+                <i class="fa fa-chevron-left"></i> iOS:webApp客户端开发小记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/02/iOS9-Swift2-Xcode7的APNS使用/" rel="prev" title="iOS:Swift2-Xcode7的APNS使用">
+                iOS:Swift2-Xcode7的APNS使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/02/阿里百川即时通讯功能-iOS开发/"
+           data-title="iOS:阿里百川即时通讯功能" data-url="https://huangshuai-iot.github.io/2015/12/02/阿里百川即时通讯功能-iOS开发/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar-hus.jpg"
+               alt="黄帅" />
+          <p class="site-author-name" itemprop="name">黄帅</p>
+          <p class="site-description motion-element" itemprop="description">说我能做的，做我说过的。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2189929640" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/huangshuai-IOT" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://52chat.cc/" title="松哥的论坛" target="_blank">松哥的论坛</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://eliyar.biz/" title="Eliyar's Blog" target="_blank">Eliyar's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://swifter.tips/" title="Swifter Tips" target="_blank">Swifter Tips</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://yuhaomin.github.io" title="女票的博客" target="_blank">女票的博客</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目需求"><span class="nav-number">2.</span> <span class="nav-text">项目需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#技术选型"><span class="nav-number">3.</span> <span class="nav-text">技术选型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目开发"><span class="nav-number">4.</span> <span class="nav-text">项目开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-快速集成"><span class="nav-number">4.1.</span> <span class="nav-text">1.快速集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Step1-Step5-引入IMSDK"><span class="nav-number">4.1.1.</span> <span class="nav-text">Step1-Step5 引入IMSDK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step6-初始化IMSDK"><span class="nav-number">4.1.2.</span> <span class="nav-text">Step6 初始化IMSDK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step7-登录IMSDK"><span class="nav-number">4.1.3.</span> <span class="nav-text">Step7 登录IMSDK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step8-打开会话列表和聊天页面"><span class="nav-number">4.1.4.</span> <span class="nav-text">Step8 打开会话列表和聊天页面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-APNS推送"><span class="nav-number">4.2.</span> <span class="nav-text">2.APNS推送</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Step1-制作并上传证书"><span class="nav-number">4.2.1.</span> <span class="nav-text">Step1 制作并上传证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step2-申请DeviceToken"><span class="nav-number">4.2.2.</span> <span class="nav-text">Step2 申请DeviceToken</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step3-处理APNS消息"><span class="nav-number">4.2.3.</span> <span class="nav-text">Step3 处理APNS消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step4-Xcode设置为Distribution证书的AdHoc-Provision打包"><span class="nav-number">4.2.4.</span> <span class="nav-text">Step4 Xcode设置为Distribution证书的AdHoc Provision打包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q-amp-A"><span class="nav-number">4.2.5.</span> <span class="nav-text">Q&A</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目总结"><span class="nav-number">5.</span> <span class="nav-text">项目总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黄帅</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+<div>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259995403'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1259995403%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"huangshuai-iot"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
