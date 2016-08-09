@@ -304,8 +304,287 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/02/使用Alamofire实现GB2312编码的网络请求/" itemprop="url">
+                  Swift:使用Alamofire实现GB2312编码的网络请求
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-02T14:04:58+08:00" content="2016-08-02">
+              2016-08-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/02/使用Alamofire实现GB2312编码的网络请求/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/02/使用Alamofire实现GB2312编码的网络请求/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          背景最近在做一个校园工具，其中有个功能是查看自己校园网账户的剩余流量。学校的网络管理中心没有开放接口，于是只能利用Alamofire来模拟登录解析数据。一开始通过GET请求获取用户账户余额都是没有问题的，但是通过POST请求的话，就无法正确访问数据。
+原因之前知道该网站是GB2312编码的，于是在解析data为HTML的时候就用GB2312解码的。但在POST数据时，也需要GB2312编码。我开始时将post的string参数用GB2312编码，发现不行。于是就查看了Alamofire的源码，发现其默认的参数编码是UTF-8，而且只有这一个选择😂。
+123if mutableURLRequest.valueForHTTPHeaderField("Content-Type") == nil &#123;    mutableURLRequest.setValue("application/
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/02/使用Alamofire实现GB2312编码的网络请求/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/28/一个UITextView的小Bug/" itemprop="url">
+                  iOS:一个UITextView的小Bug
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-28T14:55:25+08:00" content="2016-07-28">
+              2016-07-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/28/一个UITextView的小Bug/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/一个UITextView的小Bug/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          起因今天上午测试提了一个很神奇的Bug，在输入框输入某些iOS自带的表情，删除后会有残留物。例如：💺💺💺看到这个Bug，我的内心是觉得不可能啊。然后亲自试了一下，发现真会这样。至此，我发自内心佩服了我司的测试，这种问题都能发现。
+我想，这仅仅就是一个UITextView，应该不会我写的是个例，于是，我找了微信试了一下,这是微信的个人签名框，在输入完表情后，再删除，可以看到，后面留了一串残留物。我本来想直接关了这个Bug，毕竟微信这种大厂的App都能允许这个Bug。后来一想，也许是他们的测试没有我们的牛逼。
+解决方法微信的这个Bug复现，在保存后再进去，就会发现残留物没有了。所以解决思路是，在UITextView一边输入，一边给它赋值。于是实现了UITextViewDelegate的textViewDidChange方法。
+123456extension FMPersonEditSig
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/28/一个UITextView的小Bug/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/12/07/阿里百川、友盟推送SDK集成/" itemprop="url">
-                  阿里百川、友盟推送SDK集成
+                  Android:阿里百川、友盟推送SDK集成问题
                 </a>
               
             
@@ -323,6 +602,37 @@
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -416,7 +726,7 @@
               
                 
                 <a class="post-title-link" href="/2015/12/02/iOS9-Swift2-Xcode7的APNS使用/" itemprop="url">
-                  iOS9-Swift2-Xcode7的APNS使用
+                  iOS:Swift2-Xcode7的APNS使用
                 </a>
               
             
@@ -434,6 +744,37 @@
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -527,7 +868,7 @@
               
                 
                 <a class="post-title-link" href="/2015/12/02/阿里百川即时通讯功能-iOS开发/" itemprop="url">
-                  阿里百川即时通讯功能-iOS开发
+                  iOS:阿里百川即时通讯功能
                 </a>
               
             
@@ -545,6 +886,37 @@
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -638,7 +1010,7 @@
               
                 
                 <a class="post-title-link" href="/2015/11/05/iOS-webApp客户端开发小记/" itemprop="url">
-                  iOS-webApp客户端开发小记
+                  iOS:webApp客户端开发小记
                 </a>
               
             
@@ -656,6 +1028,37 @@
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -895,7 +1298,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -903,7 +1306,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -912,7 +1315,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -959,11 +1362,19 @@
             <ul class="links-of-blogroll-list">
               
                 <li class="links-of-blogroll-item">
+                  <a href="http://52chat.cc/" title="松哥的论坛" target="_blank">松哥的论坛</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
                   <a href="https://eliyar.biz/" title="Eliyar's Blog" target="_blank">Eliyar's Blog</a>
                 </li>
               
                 <li class="links-of-blogroll-item">
-                  <a href="http://swifter.tips/" title="Swifter" target="_blank">Swifter</a>
+                  <a href="http://swifter.tips/" title="Swifter Tips" target="_blank">Swifter Tips</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://yuhaomin.github.io" title="女票的博客" target="_blank">女票的博客</a>
                 </li>
               
             </ul>
@@ -986,7 +1397,7 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy;  2013 - 
+  &copy;  2015 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>

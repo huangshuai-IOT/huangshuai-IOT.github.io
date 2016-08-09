@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android,阿里百川,友盟推送," />
+  <meta name="keywords" content="iOS,UITextView," />
 
 
 
@@ -84,25 +84,21 @@
 
 
 
-<meta name="description" content="前言我在安卓项目中先集成了阿里百川即时通讯的SDK，后又集成友盟的消息推送SDK，项目编译的时候就会报以下错误。
-1Multiple dex files define Lcom/ta/utdid2/android/utils/UTDID
-报错说的很清楚:是项目引用的JAR包有重复的地方。后发现集成阿里系的SDK（支付宝等）都会出现此错误。
-错误原因1.友盟推送SDK为了提高设备标识的唯一性，除了U">
+<meta name="description" content="起因今天上午测试提了一个很神奇的Bug，在输入框输入某些iOS自带的表情，删除后会有残留物。例如：💺💺💺看到这个Bug，我的内心是觉得不可能啊。然后亲自试了一下，发现真会这样。至此，我发自内心佩服了我司的测试，这种问题都能发现。
+我想，这仅仅就是一个UITextView，应该不会我写的是个例，于是，我找了微信试了一下,这是微信的个人签名框，在输入完表情后，再删除，可以看到，后面留了一串残留物">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android:阿里百川、友盟推送SDK集成问题">
-<meta property="og:url" content="https://huangshuai-iot.github.io/2015/12/07/阿里百川、友盟推送SDK集成/index.html">
+<meta property="og:title" content="iOS:一个UITextView的小Bug">
+<meta property="og:url" content="https://huangshuai-iot.github.io/2016/07/28/一个UITextView的小Bug/index.html">
 <meta property="og:site_name" content="黄帅的博客">
-<meta property="og:description" content="前言我在安卓项目中先集成了阿里百川即时通讯的SDK，后又集成友盟的消息推送SDK，项目编译的时候就会报以下错误。
-1Multiple dex files define Lcom/ta/utdid2/android/utils/UTDID
-报错说的很清楚:是项目引用的JAR包有重复的地方。后发现集成阿里系的SDK（支付宝等）都会出现此错误。
-错误原因1.友盟推送SDK为了提高设备标识的唯一性，除了U">
-<meta property="og:updated_time" content="2016-08-09T08:39:25.000Z">
+<meta property="og:description" content="起因今天上午测试提了一个很神奇的Bug，在输入框输入某些iOS自带的表情，删除后会有残留物。例如：💺💺💺看到这个Bug，我的内心是觉得不可能啊。然后亲自试了一下，发现真会这样。至此，我发自内心佩服了我司的测试，这种问题都能发现。
+我想，这仅仅就是一个UITextView，应该不会我写的是个例，于是，我找了微信试了一下,这是微信的个人签名框，在输入完表情后，再删除，可以看到，后面留了一串残留物">
+<meta property="og:image" content="https://huangshuai-iot.github.io/uploads/blog/1-1.jpg">
+<meta property="og:updated_time" content="2016-08-09T08:32:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android:阿里百川、友盟推送SDK集成问题">
-<meta name="twitter:description" content="前言我在安卓项目中先集成了阿里百川即时通讯的SDK，后又集成友盟的消息推送SDK，项目编译的时候就会报以下错误。
-1Multiple dex files define Lcom/ta/utdid2/android/utils/UTDID
-报错说的很清楚:是项目引用的JAR包有重复的地方。后发现集成阿里系的SDK（支付宝等）都会出现此错误。
-错误原因1.友盟推送SDK为了提高设备标识的唯一性，除了U">
+<meta name="twitter:title" content="iOS:一个UITextView的小Bug">
+<meta name="twitter:description" content="起因今天上午测试提了一个很神奇的Bug，在输入框输入某些iOS自带的表情，删除后会有残留物。例如：💺💺💺看到这个Bug，我的内心是觉得不可能啊。然后亲自试了一下，发现真会这样。至此，我发自内心佩服了我司的测试，这种问题都能发现。
+我想，这仅仅就是一个UITextView，应该不会我写的是个例，于是，我找了微信试了一下,这是微信的个人签名框，在输入完表情后，再删除，可以看到，后面留了一串残留物">
+<meta name="twitter:image" content="https://huangshuai-iot.github.io/uploads/blog/1-1.jpg">
 
 
 
@@ -123,9 +119,9 @@
 
 
 
-  <link rel="canonical" href="https://huangshuai-iot.github.io/2015/12/07/阿里百川、友盟推送SDK集成/"/>
+  <link rel="canonical" href="https://huangshuai-iot.github.io/2016/07/28/一个UITextView的小Bug/"/>
 
-  <title> Android:阿里百川、友盟推送SDK集成问题 | 黄帅的博客 </title>
+  <title> iOS:一个UITextView的小Bug | 黄帅的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -311,7 +307,7 @@
             
             
               
-                Android:阿里百川、友盟推送SDK集成问题
+                iOS:一个UITextView的小Bug
               
             
           </h1>
@@ -323,8 +319,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-07T15:50:15+08:00" content="2015-12-07">
-              2015-12-07
+            <time itemprop="dateCreated" datetime="2016-07-28T14:55:25+08:00" content="2016-07-28">
+              2016-07-28
             </time>
           </span>
 
@@ -365,8 +361,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/07/阿里百川、友盟推送SDK集成/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/07/阿里百川、友盟推送SDK集成/" itemprop="commentsCount"></span>
+                <a href="/2016/07/28/一个UITextView的小Bug/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/28/一个UITextView的小Bug/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -389,12 +385,14 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我在安卓项目中先集成了阿里百川即时通讯的SDK，后又集成友盟的消息推送SDK，项目编译的时候就会报以下错误。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Multiple dex files define Lcom/ta/utdid2/android/utils/UTDID</div></pre></td></tr></table></figure>
-<p>报错说的很清楚:是项目引用的JAR包有重复的地方。后发现集成阿里系的SDK（支付宝等）都会出现此错误。</p>
-<h2 id="错误原因"><a href="#错误原因" class="headerlink" title="错误原因"></a>错误原因</h2><p>1.友盟推送SDK为了提高设备标识的唯一性，除了UMID之外，还用到了Taobao提供的一个设备标识生成库(UTDID.jar)做双向保证。当前推送SDK兼容的UDID版本是V1.1.0。</p>
-<p>2.淘宝提供的设备标识生成库(UTDID.jar)已经广泛应用在阿里系的App中了，包括支付宝。部分集成过支付宝SDK的App，在集成友盟推送SDK的时候，会存在包冲突的问题。 为此我们提供了去UTDID版本的SDK供开发者集成使用</p>
-<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>1.到友盟<a href="http://dev.umeng.com/push/android/sdk-download" target="_blank" rel="external">SDK下载页</a>去下载去UTDID版本的SDK，再集成到安卓项目中</p>
+        <h1 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h1><p>今天上午测试提了一个很神奇的Bug，在输入框输入某些iOS自带的表情，删除后会有残留物。例如：💺💺💺看到这个Bug，我的内心是觉得不可能啊。然后亲自试了一下，发现真会这样。至此，我发自内心佩服了我司的测试，这种问题都能发现。</p>
+<p>我想，这仅仅就是一个UITextView，应该不会我写的是个例，于是，我找了微信试了一下,这是微信的个人签名框，在输入完表情后，再删除，可以看到，后面留了一串残留物。<br><img src="/uploads/blog/1-1.jpg" alt="微信上Bug复现"><br>我本来想直接关了这个Bug，毕竟微信这种大厂的App都能允许这个Bug。后来一想，也许是他们的测试没有我们的牛逼。</p>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>微信的这个Bug复现，在保存后再进去，就会发现残留物没有了。所以解决思路是，在UITextView一边输入，一边给它赋值。于是实现了<code>UITextViewDelegate</code>的<code>textViewDidChange</code>方法。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">FMPersonEditSignVC</span> : <span class="title">UITextViewDelegate</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">textViewDidChange</span><span class="params">(textView:UITextView)</span></span> &#123;</div><div class="line">        <span class="keyword">self</span>.textView.text = textView.text</div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h1><p>说到<code>UITextViewDelegate</code>，我又想起来之前提的一个Bug。我们的baseVC中都加了点击空白页隐藏键盘的功能，但是在某些小屏幕机型中，比如iPhone5上，如果UITextView的高度设置的比较高，用户就点击不到空白页（我当时给测试演示，用鼠标点击的，我说这很好点啊，哈哈哈哈），进而就隐藏不了键盘。</p>
+<p>这里如果去重新画UI设置约束，我感觉劳动量太大了，于是就想着用户在输入完回车键可以隐藏键盘。另外，iOS的键盘的回车键是可以自定义设置的，我将Return Key设置显示为“Done”，更便于用户理解。</p>
+<p>检测用户输入回车的代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">FMPersonEditSignVC</span> : <span class="title">UITextViewDelegate</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">textView</span><span class="params">(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">if</span> text == <span class="string">"\n"</span> &#123;</div><div class="line">            textView.resignFirstResponder()</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -438,11 +436,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android/" rel="tag">#Android</a>
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
           
-            <a href="/tags/阿里百川/" rel="tag">#阿里百川</a>
-          
-            <a href="/tags/友盟推送/" rel="tag">#友盟推送</a>
+            <a href="/tags/UITextView/" rel="tag">#UITextView</a>
           
         </div>
       
@@ -451,16 +447,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/02/iOS9-Swift2-Xcode7的APNS使用/" rel="next" title="iOS:Swift2-Xcode7的APNS使用">
-                <i class="fa fa-chevron-left"></i> iOS:Swift2-Xcode7的APNS使用
+              <a href="/2015/12/07/阿里百川、友盟推送SDK集成/" rel="next" title="Android:阿里百川、友盟推送SDK集成问题">
+                <i class="fa fa-chevron-left"></i> Android:阿里百川、友盟推送SDK集成问题
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/07/28/一个UITextView的小Bug/" rel="prev" title="iOS:一个UITextView的小Bug">
-                iOS:一个UITextView的小Bug <i class="fa fa-chevron-right"></i>
+              <a href="/2016/08/02/使用Alamofire实现GB2312编码的网络请求/" rel="prev" title="Swift:使用Alamofire实现GB2312编码的网络请求">
+                Swift:使用Alamofire实现GB2312编码的网络请求 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -487,8 +483,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/07/阿里百川、友盟推送SDK集成/"
-           data-title="Android:阿里百川、友盟推送SDK集成问题" data-url="https://huangshuai-iot.github.io/2015/12/07/阿里百川、友盟推送SDK集成/">
+      <div class="ds-thread" data-thread-key="2016/07/28/一个UITextView的小Bug/"
+           data-title="iOS:一个UITextView的小Bug" data-url="https://huangshuai-iot.github.io/2016/07/28/一个UITextView的小Bug/">
       </div>
     
   </div>
@@ -625,7 +621,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#错误原因"><span class="nav-number">2.</span> <span class="nav-text">错误原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方法"><span class="nav-number">3.</span> <span class="nav-text">解决方法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#起因"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决方法"><span class="nav-number">2.</span> <span class="nav-text">解决方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#番外篇"><span class="nav-number">3.</span> <span class="nav-text">番外篇</span></a></li></ol></div>
             
           </div>
         </section>
