@@ -1,5 +1,5 @@
 ---
-title: iOS:Swift2-Xcode7的APNS使用
+title: iOS Swift Xcode7 的 APNS 使用
 date: 2015-12-02 20:55:15
 tags:
 - iOS

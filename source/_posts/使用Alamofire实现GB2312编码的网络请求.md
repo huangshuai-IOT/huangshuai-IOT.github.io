@@ -1,5 +1,5 @@
 ---
-title: Swift:使用Alamofire实现GB2312编码的网络请求
+title: Swift 使用 Alamofire 实现 GB2312 编码的网络请求
 date: 2016-08-02 14:04:58
 tags:
 - iOS
@@ -41,7 +41,7 @@ private func urlRequestWithComponents(urlString:String,parameters:[String: AnyOb
     mutableURLRequest.HTTPMethod = Alamofire.Method.POST.rawValue
     let contentType = "application/x-www-form-urlencoded"
     mutableURLRequest.setValue(contentType, forHTTPHeaderField: "Content-Type")
-    mutableURLRequest.setValue("http://nic.ahnu.edu.cn/cgi-bin/service", forHTTPHeaderField: "Referer")
+    mutableURLRequest.setValue("*******", forHTTPHeaderField: "Referer")
         
     // add parameters
     let uploadData = NSMutableData()

@@ -1,5 +1,5 @@
 ---
-title: Swift模拟登陆小结
+title: Swift 模拟登陆小结
 date: 2016-08-02 18:27:36
 tags: 
 - Swift 
@@ -10,27 +10,16 @@ categories:
 - iOS
 ---
 
-元旦到现在都没有写博客了，就拿这篇当做重新开始的起点吧。
 
 # 背景
 
-过完年在学校度过大学的最后一学期，期间加深学习了Python的Django和iOS开发。在学习的过程中，就想着做一个校园iOS应用。由于我们的需要的信息分散在学校各个部门的系统中，此时就需要通过模拟登陆来获取我们想要的信息。一开始是用python来模拟登陆解析数据的，后期由于我对架构设计的改变，我把很多解析放在手机端来处理，所以就应运而出本篇博文。
+过完年在学校度过大学的最后一学期，期间加深学习了Python的Django和iOS开发。在学习的过程中，就想着临走前做一个校园应用。由于我们的需要的信息分散在学校各个部门的系统中，此时就需要通过模拟登陆来获取我们想要的信息。一开始是用python来模拟登陆解析数据的，后期由于我对架构设计的改变（主要是服务器资源和流量没钱买😂），我把很多解析放在手机端（暂时为iOS端）来处理，所以就应运而出本篇博文。
 
 # 准备工作
 
-要模拟浏览器登陆，首先得分析浏览器登陆的步骤，再用代码来实现。
+要模拟浏览器登陆，首先得分析浏览器登陆的步骤，再用代码来实现。在分析浏览器登陆之前先介绍一下使用到的工具。
 
 ## 工具
-
-### Alamofire
-
-1. Alamofire 的前身是 AFNetworking。AFNetworking 是 iOS 和 OS X 上很受欢迎的第三方HTTP网络基础库。
-2. 其实 AFNetwork 的前缀 AF 便是 Alamofire 的缩写。
-3. Swift发布后，AFNetworking的作者又用Swift语言写了个相同功能的库，这便是 Alamofire。
-4. Alamofire 本质是基于`NSURLSession`，并做了封装。使用 Alamofire 可以让我们网络请求相关代码（如获取数据，提交数据，上传文件，下载文件等）更加简洁易用。
-
-**关于Cookie:**
-Alamofire是基于NSURLRequest封装的，所以Cookie会自动保存，就和浏览器请求是一个效果。而且网站Set_cookie多久，本地的Cookie就多久，每次请求的时候都会自动带上cookie，直到过期。（所以像登陆session这些的都不用我们手动去处理）。
 
 ### Charles
 
@@ -44,6 +33,16 @@ Alamofire是基于NSURLRequest封装的，所以Cookie会自动保存，就和�
 
 这是一个在线的[站长工具](http://tool.chinaz.com/tools/urlencode.aspx)，可以进行各类编码间的转换，最常用的应该就是utf-8的UrlDecode和UrlEncode。这个工具还非常贴心的提供了gb2312格式的UrlDecode和UrlEncode。
 
+### Alamofire（iOS网络库）
+
+1. Alamofire 的前身是 AFNetworking。AFNetworking 是 iOS 和 OS X 上很受欢迎的第三方HTTP网络基础库。
+2. 其实 AFNetwork 的前缀 AF 便是 Alamofire 的缩写。
+3. Swift发布后，AFNetworking的作者又用Swift语言写了个相同功能的库，这便是 Alamofire。
+4. Alamofire 本质是基于`NSURLSession`，并做了封装。使用 Alamofire 可以让我们网络请求相关代码（如获取数据，提交数据，上传文件，下载文件等）更加简洁易用。
+
+**关于Cookie:**
+Alamofire是基于NSURLRequest封装的，所以Cookie会自动保存，就和浏览器请求是一个效果。而且网站Set_cookie多久，本地的Cookie就多久，每次请求的时候都会自动带上cookie，直到过期。（所以像登陆session这些的都不用我们手动去处理）。
+
 ## 基础知识
 
 POST请求和GET请求应该就不用解释了，这里提醒一下编码格式，现在大部分服务器都是utf-8编码格式的，但不排除少量用的GB2312。所以在发现服务器响应数据乱码时要检查返回数据的编码格式。
@@ -54,7 +53,7 @@ POST请求和GET请求应该就不用解释了，这里提醒一下编码格式�
 
 做校园APP想到的第一个功能就是查成绩查课表，于是第一个就是拿教务系统动刀。
 
-教务系统登陆的时候，其实是跳转到一个check页验证账号密码，再跳转回教务系统首页。该网页返回的就是JSON数据，所以用的`responseJSON`。
+通过Charles发现，使用网页登陆教务系统的时候，其实是跳转到一个check页验证账号密码，再跳转回教务系统首页。该网页返回的就是JSON数据，所以用的`responseJSON`。
 
 ``` swift
 Alamofire.request(Method.POST, SchoolBaseURL+"login/check.shtml"
@@ -155,8 +154,6 @@ Alamofire.upload(urlRequest.0, data: urlRequest.1).response {
     print(htmlString)
 }
 ```
-
-// 未完待续
 
 
 

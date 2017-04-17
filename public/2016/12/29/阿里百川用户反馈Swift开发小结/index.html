@@ -1,0 +1,816 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Swift,阿里百川,用户反馈," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="黄帅的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="背景所有的App都需要给用户一个反馈意见的功能，这样才能让用户使用的更好更方便。不想自己写这一套组件，因此调研了几款第三方的反馈组件。
+Instabug九月份上架的师大助手App用的就是这个反馈组件，知乎日报用的也是这个，不管在App任何界面摇一摇就可以触发，Instabug会把当前界面进行截图并且支持用户编辑，非常方便好用的组件，这个用来反馈bug我觉得非常好用，但是作为反馈意见的话，感觉还是缺">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里百川用户反馈Swift开发小结">
+<meta property="og:url" content="https://huangshuai-iot.github.io/2016/12/29/阿里百川用户反馈Swift开发小结/index.html">
+<meta property="og:site_name" content="黄帅的博客">
+<meta property="og:description" content="背景所有的App都需要给用户一个反馈意见的功能，这样才能让用户使用的更好更方便。不想自己写这一套组件，因此调研了几款第三方的反馈组件。
+Instabug九月份上架的师大助手App用的就是这个反馈组件，知乎日报用的也是这个，不管在App任何界面摇一摇就可以触发，Instabug会把当前界面进行截图并且支持用户编辑，非常方便好用的组件，这个用来反馈bug我觉得非常好用，但是作为反馈意见的话，感觉还是缺">
+<meta property="og:image" content="http://7xqj7o.com1.z0.glb.clouddn.com/blog/Blog_Baichuan_1.PNG">
+<meta property="og:image" content="http://7xqj7o.com1.z0.glb.clouddn.com/blog/Blog_Baichuan_2.PNG">
+<meta property="og:updated_time" content="2016-12-29T14:07:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="阿里百川用户反馈Swift开发小结">
+<meta name="twitter:description" content="背景所有的App都需要给用户一个反馈意见的功能，这样才能让用户使用的更好更方便。不想自己写这一套组件，因此调研了几款第三方的反馈组件。
+Instabug九月份上架的师大助手App用的就是这个反馈组件，知乎日报用的也是这个，不管在App任何界面摇一摇就可以触发，Instabug会把当前界面进行截图并且支持用户编辑，非常方便好用的组件，这个用来反馈bug我觉得非常好用，但是作为反馈意见的话，感觉还是缺">
+<meta name="twitter:image" content="http://7xqj7o.com1.z0.glb.clouddn.com/blog/Blog_Baichuan_1.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://huangshuai-iot.github.io/2016/12/29/阿里百川用户反馈Swift开发小结/"/>
+
+  <title> 阿里百川用户反馈Swift开发小结 | 黄帅的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?de241358bbb90d3e97f1f8486e6d5b41";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s6.cnzz.com/stat.php?id=1259995403&web_id=1259995403" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">黄帅的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Just I decided.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'yQ1raifaH1s316jSamV8','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                阿里百川用户反馈Swift开发小结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-29T19:41:25+08:00" content="2016-12-29">
+              2016-12-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/29/阿里百川用户反馈Swift开发小结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/29/阿里百川用户反馈Swift开发小结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>所有的App都需要给用户一个反馈意见的功能，这样才能让用户使用的更好更方便。不想自己写这一套组件，因此调研了几款第三方的反馈组件。</p>
+<h3 id="Instabug"><a href="#Instabug" class="headerlink" title="Instabug"></a>Instabug</h3><p>九月份上架的师大助手App用的就是这个反馈组件，知乎日报用的也是这个，不管在App任何界面摇一摇就可以触发，Instabug会把当前界面进行截图并且支持用户编辑，非常方便好用的组件，这个用来反馈bug我觉得非常好用，但是作为反馈意见的话，感觉还是缺少一个入口。另外，Instabug采集Bug还是非常准确的。</p>
+<h3 id="LeanCloud"><a href="#LeanCloud" class="headerlink" title="LeanCloud"></a>LeanCloud</h3><p>LeanCloud的反馈组件号称两行代码接入，非常方便，它做成一个对话框的形式，客服与用户可以进行交流，并且用户的反馈可以及时发给开发人员的LeanCloud 手机客户端，实时性非常高。</p>
+<h3 id="阿里百川"><a href="#阿里百川" class="headerlink" title="阿里百川"></a>阿里百川</h3><p>一年之前开发的app用了阿里百川（阿里巴巴无限开放平台）的即时通讯功能，当时阿里巴巴刚把友盟这些公司收购，阿里巴巴无线开放平台还没有现在这么多功能，一年过去了，现在的功能已经非常多了。今天看用户反馈功能时，看到了他们的2.0版本的反馈组件，觉得这种加入了常见反馈问题这一页特别好，用户在反馈之前，可以先自行查看相似问题的解答。并且，相似问题的解答是可以实时在后台添加修改，这极大方便了用户。</p>
+<p>于是就暂定了使用阿里百川，于是进行了接入的技术验证。先看一下效果图：</p>
+<div id="tt" style="display: inline-block;"><br>       <img src="http://7xqj7o.com1.z0.glb.clouddn.com/blog/Blog_Baichuan_1.PNG" width="50%" height="25%"><br>       <img src="http://7xqj7o.com1.z0.glb.clouddn.com/blog/Blog_Baichuan_2.PNG" width="50%" height="25%"><br></div>
+
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="Part1-阿里百川平台注册"><a href="#Part1-阿里百川平台注册" class="headerlink" title="Part1 阿里百川平台注册"></a>Part1 阿里百川平台注册</h3><p>这里按照官方的接入流程就可以很容易完成了，就不赘述了。</p>
+<h3 id="Part2-用户反馈SDK导入"><a href="#Part2-用户反馈SDK导入" class="headerlink" title="Part2 用户反馈SDK导入"></a>Part2 用户反馈SDK导入</h3><p>我选择使用的是专业版2.0，SDK用的是Cocoapods安装方式，在Podfile添加阿里的私有源。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">source 'http:<span class="comment">//repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecs.git'</span></div><div class="line">source 'http:<span class="comment">//repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecsMirror.git'</span></div><div class="line">target '<span class="type">YourTargetName'</span> <span class="keyword">do</span></div><div class="line">    pod '<span class="type">YWFeedbackFMWK'</span>, '~&gt; <span class="number">2.0</span>.<span class="number">3.1</span>'</div><div class="line">end</div></pre></td></tr></table></figure>
+<p>接着使用 <code>pod install</code> 安装出现了一个问题，就是我之前用的 Alamofire 等其他很多组件安装不了，出现需要更新的问题，我这里猜测 AliBCSpecsMirror 和 CocoaPods/Specs 有一些差异，弄了一会索性直接在上面再添加 CocoaPods 的仓库，<code>source &#39;https://github.com/CocoaPods/Specs.git&#39;</code>, 这样就能同时安装YWFeedbackFMWK和我之前的其他组件了，但是又会出现repo仓库有两份的warning，这个还没解决好，我考完试再找找解决方法。</p>
+<p>注意： Cocoapods集成方式不需要手动添加依赖系统库</p>
+<p>修改编译选项：<br>在Target-&gt;Linking-&gt;Other Linker Flags中添加-ObjC选项。</p>
+<p>iOS 10中隐私权限设置：<br>如果不做设置，可能会导致崩溃、审核不通过等情况。需要在info plist中增加字段：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>NSCameraUsageDescription<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>访问相机<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">key</span>&gt;</span>NSPhotoLibraryUsageDescription<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">string</span>&gt;</span>访问相册<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="Part3-初始化SDK，打开反馈页面"><a href="#Part3-初始化SDK，打开反馈页面" class="headerlink" title="Part3 初始化SDK，打开反馈页面"></a>Part3 初始化SDK，打开反馈页面</h3><ol>
+<li>在桥接头文件中加入：</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#<span class="keyword">import</span> &lt;YWFeedbackFMWK/YWFeedbackKit.h&gt;</div><div class="line">#<span class="keyword">import</span> &lt;YWFeedbackFMWK/YWFeedbackViewController.h&gt;</div></pre></td></tr></table></figure>
+<ol>
+<li>调用初始化方法：</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> bcKit = <span class="type">BCFeedbackKit</span>(appKey: <span class="string">"自己的appkey"</span>)</div></pre></td></tr></table></figure>
+<p><strong>注意：</strong>这里需要将在阿里百川后台生成的安全图片添加进项目目录中</p>
+<ol>
+<li>设置业务方扩展的反馈数据：<br>相当于给反馈信息中加入反馈用户的个人信息，可设置任意字段，在创建反馈页面前设置，可在后台扩展信息中查看。</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bcKit.extInfo = [<span class="string">"username"</span>:<span class="string">"自己app用户体系中的用户id"</span>]</div></pre></td></tr></table></figure>
+<ol>
+<li>打开反馈页面：</li>
+<li><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">bcKit.makeFeedbackViewController(completionBlock: &#123; (feedbackVC, error) <span class="keyword">in</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> vc = feedbackVC &#123;</div><div class="line">    <span class="comment">// 当用户关闭用户反馈，将调用该block进行dismiss或pop</span></div><div class="line">        vc.closeBlock = &#123;(aParentController) <span class="keyword">in</span></div><div class="line">            aParentController?.navigationController?.popViewController(animated: <span class="literal">false</span>)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">self</span>.navigationController?.isNavigationBarHidden = <span class="literal">false</span>        </div><div class="line">        <span class="keyword">self</span>.navigationController?.pushViewController(vc, animated: <span class="literal">false</span>)</div><div class="line">    &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这样就完成了在app中加入反馈页面的添加。</p>
+<h3 id="Part4-阿里百川控制台配置反馈组件"><a href="#Part4-阿里百川控制台配置反馈组件" class="headerlink" title="Part4 阿里百川控制台配置反馈组件"></a>Part4 阿里百川控制台配置反馈组件</h3><p>在阿里百川用户反馈后台，可以在App内反馈中查看用户发送的反馈信息，还可以在Mobile客户端配置中自定义配置app中反馈页面的UI。这是我觉得的该产品的亮点所在，可以实时配置热门问题，减去了在app开发时需要考虑的动态获取生成热门问题的过程，而且整个appUI全都实时动态设置。具体操作大家用一下就很容易了解了。</p>
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>通过使用阿里百川用户反馈组件，我又一次看到了H5的用途。对于这类弱使用强度、高数据变更、低页面逻辑的页面，我觉得H5的用途大大体现了，虽然讲这样的一个反馈的原生页面以及一套后台处理系统没有什么技术实现上的困难点，但是对于大部分app开发来讲，还是需要消耗时间精力来做的，更重要的是这不是用户使用app的刚需，因此这种即插即用可服务端实时配置的H5反馈页面的出现恰到好处。</p>
+<h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2><p>push 百川 feedbackVC 的时候，因此 NavigationBar 部分会黑一下再显示。很奇怪的是我如果在 push之前 navigationController 隐藏了 NavigationBar ，这个 feedbackVC 就没有了 NavigationBar。反馈页面其实就是一个 webView，因此我没有搞懂为什么 navigationController 的NavigationBar 显示与否会影响一个 webView 里面 H5 页面的 NavigationBar 显示。这个问题我得再研究研究。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/wechat-reward-image.JPG" alt="黄帅 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/alipay-reward-image.JPG" alt="黄帅 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag">#Swift</a>
+          
+            <a href="/tags/阿里百川/" rel="tag">#阿里百川</a>
+          
+            <a href="/tags/用户反馈/" rel="tag">#用户反馈</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/11/iOS10-Today-Extension-开发小结/" rel="next" title="iOS10 Today Extension 开发小结 ">
+                <i class="fa fa-chevron-left"></i> iOS10 Today Extension 开发小结 
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/29/阿里百川用户反馈Swift开发小结/"
+           data-title="阿里百川用户反馈Swift开发小结" data-url="https://huangshuai-iot.github.io/2016/12/29/阿里百川用户反馈Swift开发小结/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar-hus.jpg"
+               alt="黄帅" />
+          <p class="site-author-name" itemprop="name">黄帅</p>
+          <p class="site-description motion-element" itemprop="description">说我能做的，做我说过的。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2189929640" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/huangshuai-IOT" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://yuhaomin.github.io" title="女票的博客😘" target="_blank">女票的博客😘</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://52chat.cc/" title="松哥的论坛" target="_blank">松哥的论坛</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://eliyar.biz/" title="Eliyar's Blog" target="_blank">Eliyar's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://swifter.tips/" title="Swifter Tips" target="_blank">Swifter Tips</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Instabug"><span class="nav-number">1.1.</span> <span class="nav-text">Instabug</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LeanCloud"><span class="nav-number">1.2.</span> <span class="nav-text">LeanCloud</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阿里百川"><span class="nav-number">1.3.</span> <span class="nav-text">阿里百川</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Part1-阿里百川平台注册"><span class="nav-number">2.1.</span> <span class="nav-text">Part1 阿里百川平台注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part2-用户反馈SDK导入"><span class="nav-number">2.2.</span> <span class="nav-text">Part2 用户反馈SDK导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part3-初始化SDK，打开反馈页面"><span class="nav-number">2.3.</span> <span class="nav-text">Part3 初始化SDK，打开反馈页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part4-阿里百川控制台配置反馈组件"><span class="nav-number">2.4.</span> <span class="nav-text">Part4 阿里百川控制台配置反馈组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思考"><span class="nav-number">3.</span> <span class="nav-text">思考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#番外篇"><span class="nav-number">4.</span> <span class="nav-text">番外篇</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黄帅</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+<div>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259995403'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1259995403%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"huangshuai-iot"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
