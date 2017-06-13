@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://huangshuai-iot.github.io/"/>
-  <updated>2016-12-29T14:07:05.000Z</updated>
+  <updated>2017-06-09T15:12:41.000Z</updated>
   <id>https://huangshuai-iot.github.io/</id>
   
   <author>
@@ -14,6 +14,47 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>非商业用途的 HomeKit 配件开发的常见问题</title>
+    <link href="https://huangshuai-iot.github.io/2017/06/09/HomeKit%20Accessory%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E9%97%AE%E9%A2%98/"/>
+    <id>https://huangshuai-iot.github.io/2017/06/09/HomeKit Accessory开发基础问题/</id>
+    <published>2017-06-09T03:02:07.000Z</published>
+    <updated>2017-06-09T15:12:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前天在 iOS11 的家庭 app 中看到苹果提醒我自己开发的智能设备没有经过认证，还以为苹果会关闭黑 HomeBridge 协议这个HomeKit接口，没想到 WWDC2017 今天公布了 HomeKit 非商业用途的配件的接入协议。可以让个人开发者接入自己的WiFi和BLE类型的智能硬件设备。本文是对官网 FAQs 的整理。</p>
+<h1 id="基础问题"><a href="#基础问题" class="headerlink" title="基础问题"></a>基础问题</h1><p>HomeKit 配件协议（HAP）是苹果专门用来使第三方配件（例如灯、恒湿器和门锁类）和苹果设备（iPhone、iPad、Apple Watch、AppleTV）之间相互通信的协议。HAP 支持两类通信方式：IP 和 BLE 。在 HAP（非商业版）协议中提供了如何为你的非商业用途配件实现 HAP 协议，意思就是我们自己开发的设备怎样以官方认可的方式接入 HomeKit，而不是利用黑 HomeBridge 协议来实现。 </p>
+<h2 id="如何获得这个协议规范？"><a href="#如何获得这个协议规范？" class="headerlink" title="如何获得这个协议规范？"></a>如何获得这个协议规范？</h2><p>HomeKit 配件协议规范可以从<a href="https://developer.apple.com/homekit/" target="_blank" rel="external">HomeKit开发者网页</a>下载。在你下载文档之前，你需要用你的 AppleID 登陆，然后同意开发协议。</p>
+<h2 id="利用本规范开发的配件和利用商业版本的-HomeKit-的配件有什么不同？"><a href="#利用本规范开发的配件和利用商业版本的-HomeKit-的配件有什么不同？" class="headerlink" title="利用本规范开发的配件和利用商业版本的 HomeKit 的配件有什么不同？"></a>利用本规范开发的配件和利用商业版本的 HomeKit 的配件有什么不同？</h2><p>使用本规范创建的配件不包含 Apple 认证协处理器或者获得Wi-Fi Alliance 认证，并且不会在MFI项目下完成 HomeKit 认证。对于用户来说，差异主要是基于IP的附件添加过程，并且在用户继续添加的过程中会弹出警告对话框，说明该设备没有经过苹果认证。</p>
+<h2 id="如何开发生产-HomeKit-的配件来发布销售？"><a href="#如何开发生产-HomeKit-的配件来发布销售？" class="headerlink" title="如何开发生产 HomeKit 的配件来发布销售？"></a>如何开发生产 HomeKit 的配件来发布销售？</h2><p>你的公司必须首先参加 MFI 计划，进行商业销售的第三方HomeKit 配件必须在生产销售之前要实现 MFI 计划，包括完成HomeKit 认证。</p>
+<h2 id="是否可以在我的配件上添加“Works-with-Apple-HomeKit”标志？"><a href="#是否可以在我的配件上添加“Works-with-Apple-HomeKit”标志？" class="headerlink" title="是否可以在我的配件上添加“Works with Apple HomeKit”标志？"></a>是否可以在我的配件上添加“Works with Apple HomeKit”标志？</h2><p>不允许，这个标志只能用于 MFI 项目并且完成 HomeKit 认证的商业配件。</p>
+<h1 id="技术相关问题"><a href="#技术相关问题" class="headerlink" title="技术相关问题"></a>技术相关问题</h1><h2 id="是否可以通过-iOS-内置的家庭app-和-Siri-来控制我的配件，并且创建家庭场景？"><a href="#是否可以通过-iOS-内置的家庭app-和-Siri-来控制我的配件，并且创建家庭场景？" class="headerlink" title="是否可以通过 iOS 内置的家庭app 和 Siri 来控制我的配件，并且创建家庭场景？"></a>是否可以通过 iOS 内置的家庭app 和 Siri 来控制我的配件，并且创建家庭场景？</h2><p>可以，如果你使用 Apple 定义的 HomeKit 服务和本规范中的属性实现HAP协议，并且手机中运行 iOS10 及更高版本，则可以使用家庭app 和 Siri 来控制配件的功能。可以通过<a href="https://support.apple.com/zh-cn/HT204893" target="_blank" rel="external">家庭App 使用说明</a>来获得更多帮助。</p>
+<h2 id="可以创建一个配件实现-Apple-尚未定义的-HomeKit-服务吗？"><a href="#可以创建一个配件实现-Apple-尚未定义的-HomeKit-服务吗？" class="headerlink" title="可以创建一个配件实现 Apple 尚未定义的 HomeKit 服务吗？"></a>可以创建一个配件实现 Apple 尚未定义的 HomeKit 服务吗？</h2><p>可以，你可以创建一个使用自定义服务类型，并且实现 HAP 协议的配件。但为了控制这个配件，你需要开发一个使用 HomeKit API 的自定义应用程序。但这样你就无法通过家庭应用程序或者Siri 进行控制你的设备了。</p>
+<h2 id="我的配件如何与-iOS设备配对？"><a href="#我的配件如何与-iOS设备配对？" class="headerlink" title="我的配件如何与 iOS设备配对？"></a>我的配件如何与 iOS设备配对？</h2><p>对于IP类配件，配件和iOS设备首先得在同一个WiFi网络下，联网显示配件的方式依赖于你所使用的硬件开发平台。然后你可以通过家庭App或者你自己开发的App来完成配对过程。对于BLE类配件，可以像你平常与BLE设备配对那样进行配对。</p>
+<h2 id="我是否可以远程控制我的配件，并且使用家庭App设置自动化操作？"><a href="#我是否可以远程控制我的配件，并且使用家庭App设置自动化操作？" class="headerlink" title="我是否可以远程控制我的配件，并且使用家庭App设置自动化操作？"></a>我是否可以远程控制我的配件，并且使用家庭App设置自动化操作？</h2><p>可以，如果配件使用 Apple定义的 HomeKit 服务，并且你将iPad 或者 Apple TV（第四代）设置为家庭中枢，你就可以实现远程控制。有关详细信息，可以查看<a href="https://support.apple.com/zh-cn/HT207057" target="_blank" rel="external">自动化和远程访问 HomeKit 配件</a>文档。</p>
+<h2 id="HAP使用了什么安全特性？"><a href="#HAP使用了什么安全特性？" class="headerlink" title="HAP使用了什么安全特性？"></a>HAP使用了什么安全特性？</h2><p>HomeKit 配件与 Apple 产品之间通过 HAP 的所有通信都是端到端加密的，并且是相互认证的。</p>
+<h2 id="IP类的-HomeKit-配件是否必须实现-Bonjour？"><a href="#IP类的-HomeKit-配件是否必须实现-Bonjour？" class="headerlink" title="IP类的 HomeKit 配件是否必须实现 Bonjour？"></a>IP类的 HomeKit 配件是否必须实现 Bonjour？</h2><p>是的，配件必须实现Bonjour才能被发现。Bonjour代码和规范可以在<a href="https://developer.apple.com/bonjour/" target="_blank" rel="external">Bonjour</a>文档中查看。</p>
+<h2 id="BLE-类配件是否必须遵守蓝牙核心规范？"><a href="#BLE-类配件是否必须遵守蓝牙核心规范？" class="headerlink" title="BLE 类配件是否必须遵守蓝牙核心规范？"></a>BLE 类配件是否必须遵守蓝牙核心规范？</h2><p>强烈推荐设备遵守蓝牙核心规范，这样可以确保配件的正常运行。</p>
+<h2 id="是否可以从-Apple-获得-HomeKitSDK？"><a href="#是否可以从-Apple-获得-HomeKitSDK？" class="headerlink" title="是否可以从 Apple 获得 HomeKitSDK？"></a>是否可以从 Apple 获得 HomeKitSDK？</h2><p>暂时不行。</p>
+<h2 id="为什么我的附件在-iOS设备上会有警告对话框？"><a href="#为什么我的附件在-iOS设备上会有警告对话框？" class="headerlink" title="为什么我的附件在 iOS设备上会有警告对话框？"></a>为什么我的附件在 iOS设备上会有警告对话框？</h2><p>不包含Apple认证协处理器的配件将在iOS中触发警告对话框，这表示该配件未经 HomeKit 认证，用户可以点击确认，继续使用该配件。</p>
+<h2 id="是否可以在我的配件中添加一个Apple认证协处理器？"><a href="#是否可以在我的配件中添加一个Apple认证协处理器？" class="headerlink" title="是否可以在我的配件中添加一个Apple认证协处理器？"></a>是否可以在我的配件中添加一个Apple认证协处理器？</h2><p>不允许，认证协处理器仅用于商用 HomeKit 配件，该组件只适用于经过MFI认证的公司。</p>
+<h2 id="在哪可以提问关于实现HAP的问题？"><a href="#在哪可以提问关于实现HAP的问题？" class="headerlink" title="在哪可以提问关于实现HAP的问题？"></a>在哪可以提问关于实现HAP的问题？</h2><p>向其他开发者或者智能家居爱好者询问技术问题或者讨论 HomeKit 配件协议，请访问<a href="https://forums.developer.apple.com/welcome" target="_blank" rel="external">Apple开发者论坛</a>。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;前天在 iOS11 的家庭 app 中看到苹果提醒我自己开发的智能设备没有经过认证，还以为苹果会关闭黑 HomeBridge 协议这个Hom
+    
+    </summary>
+    
+      <category term="HomeKit" scheme="https://huangshuai-iot.github.io/categories/HomeKit/"/>
+    
+    
+      <category term="HomeKit" scheme="https://huangshuai-iot.github.io/tags/HomeKit/"/>
+    
+      <category term="HomeKit Accessory Protocol" scheme="https://huangshuai-iot.github.io/tags/HomeKit-Accessory-Protocol/"/>
+    
+  </entry>
   
   <entry>
     <title>阿里百川用户反馈Swift开发小结</title>
@@ -330,9 +371,9 @@
     
       <category term="Swift" scheme="https://huangshuai-iot.github.io/tags/Swift/"/>
     
-      <category term="Alamofire" scheme="https://huangshuai-iot.github.io/tags/Alamofire/"/>
-    
       <category term="iOS" scheme="https://huangshuai-iot.github.io/tags/iOS/"/>
+    
+      <category term="Alamofire" scheme="https://huangshuai-iot.github.io/tags/Alamofire/"/>
     
       <category term="GB2312编码" scheme="https://huangshuai-iot.github.io/tags/GB2312%E7%BC%96%E7%A0%81/"/>
     
@@ -399,9 +440,9 @@
       <category term="iOS" scheme="https://huangshuai-iot.github.io/categories/%E5%BC%80%E5%8F%91/iOS/"/>
     
     
-      <category term="阿里百川" scheme="https://huangshuai-iot.github.io/tags/%E9%98%BF%E9%87%8C%E7%99%BE%E5%B7%9D/"/>
-    
       <category term="Android" scheme="https://huangshuai-iot.github.io/tags/Android/"/>
+    
+      <category term="阿里百川" scheme="https://huangshuai-iot.github.io/tags/%E9%98%BF%E9%87%8C%E7%99%BE%E5%B7%9D/"/>
     
       <category term="友盟推送" scheme="https://huangshuai-iot.github.io/tags/%E5%8F%8B%E7%9B%9F%E6%8E%A8%E9%80%81/"/>
     
@@ -520,9 +561,9 @@
     
       <category term="iOS" scheme="https://huangshuai-iot.github.io/tags/iOS/"/>
     
-      <category term="即时通讯" scheme="https://huangshuai-iot.github.io/tags/%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/"/>
-    
       <category term="阿里百川" scheme="https://huangshuai-iot.github.io/tags/%E9%98%BF%E9%87%8C%E7%99%BE%E5%B7%9D/"/>
+    
+      <category term="即时通讯" scheme="https://huangshuai-iot.github.io/tags/%E5%8D%B3%E6%97%B6%E9%80%9A%E8%AE%AF/"/>
     
   </entry>
   
