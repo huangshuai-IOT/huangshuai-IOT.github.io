@@ -1,0 +1,818 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ARKit,翻译," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="黄帅的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="翻译自 Handling 3D Interaction and UI Controls in Augmented Reality
+
+遵循AR体验中的视觉反馈、手势交互和现实渲染的最佳实践。
+概述AR为用户提供了在app中与现实和虚拟3D内容交互的新方法。但是，人机界面设计的许多基本原理仍然有效。令人信服的AR幻想同样需要仔细关注3D资源和渲染。iOS人机界面指南包含有关AR人机界面原则的建议。该">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ARKit入门-在AR中处理3D交互和UI控制">
+<meta property="og:url" content="https://huangshuai-iot.github.io/2017/11/24/2017-11-24-ARKit入门-1/index.html">
+<meta property="og:site_name" content="黄帅的博客">
+<meta property="og:description" content="翻译自 Handling 3D Interaction and UI Controls in Augmented Reality
+
+遵循AR体验中的视觉反馈、手势交互和现实渲染的最佳实践。
+概述AR为用户提供了在app中与现实和虚拟3D内容交互的新方法。但是，人机界面设计的许多基本原理仍然有效。令人信服的AR幻想同样需要仔细关注3D资源和渲染。iOS人机界面指南包含有关AR人机界面原则的建议。该">
+<meta property="og:image" content="https://docs-assets.developer.apple.com/published/d43e250ee6/de02235f-216c-4d3f-8730-e3d433163b62.png">
+<meta property="og:image" content="https://docs-assets.developer.apple.com/published/f385e426f2/d665844f-2945-44f9-9896-06a1bb53251a.png">
+<meta property="og:updated_time" content="2017-11-24T12:14:09.781Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ARKit入门-在AR中处理3D交互和UI控制">
+<meta name="twitter:description" content="翻译自 Handling 3D Interaction and UI Controls in Augmented Reality
+
+遵循AR体验中的视觉反馈、手势交互和现实渲染的最佳实践。
+概述AR为用户提供了在app中与现实和虚拟3D内容交互的新方法。但是，人机界面设计的许多基本原理仍然有效。令人信服的AR幻想同样需要仔细关注3D资源和渲染。iOS人机界面指南包含有关AR人机界面原则的建议。该">
+<meta name="twitter:image" content="https://docs-assets.developer.apple.com/published/d43e250ee6/de02235f-216c-4d3f-8730-e3d433163b62.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://huangshuai-iot.github.io/2017/11/24/2017-11-24-ARKit入门-1/"/>
+
+  <title> ARKit入门-在AR中处理3D交互和UI控制 | 黄帅的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?de241358bbb90d3e97f1f8486e6d5b41";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s6.cnzz.com/stat.php?id=1259995403&web_id=1259995403" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">黄帅的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Just I decided.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'yQ1raifaH1s316jSamV8','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ARKit入门-在AR中处理3D交互和UI控制
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-11-24T20:05:19+08:00" content="2017-11-24">
+              2017-11-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ARKit/" itemprop="url" rel="index">
+                    <span itemprop="name">ARKit</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ARKit/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/11/24/2017-11-24-ARKit入门-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/24/2017-11-24-ARKit入门-1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>翻译自 <a href="https://developer.apple.com/documentation/arkit/handling_3d_interaction_and_ui_controls_in_augmented_reality" target="_blank" rel="external">Handling 3D Interaction and UI Controls in Augmented Reality</a></p>
+</blockquote>
+<p>遵循AR体验中的视觉反馈、手势交互和现实渲染的最佳实践。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>AR为用户提供了在app中与现实和虚拟3D内容交互的新方法。但是，人机界面设计的许多基本原理仍然有效。令人信服的AR幻想同样需要仔细关注3D资源和渲染。iOS人机界面指南包含有关AR人机界面原则的建议。该项目展示了如何应用这些指导方法轻松地创建身临其境、直观的AR体验。</p>
+<p>这个示例app提供了一个简单的AR体验，允许用户将一个或多个真实的虚拟对象放置在现实世界的环境中，然后试用直观的手势来排列这些对象。该app提供了用户界面提示，以帮助用户了解AR体验的状态以及交互选项。</p>
+<p>以下各节对应于 <a href="https://developer.apple.com/ios/human-interface-guidelines/technologies/augmented-reality/" target="_blank" rel="external">iOS人机交互指南&gt;AR</a> 中的各个部分，并提供有关该示例app如何实现这些指南的详细信息。有关每个部分的更详细的推理，请参阅iOS人机界面的指南的相应部分。</p>
+<h2 id="放置虚拟对象"><a href="#放置虚拟对象" class="headerlink" title="放置虚拟对象"></a>放置虚拟对象</h2><p>帮助人们了解何时定位平面和放置虚拟对象。FocusSquare 类在AR View中绘制方形轮廓，为用户提供有关 ARKit 世界跟踪状态的提示。</p>
+<p><img src="https://docs-assets.developer.apple.com/published/d43e250ee6/de02235f-216c-4d3f-8730-e3d433163b62.png" alt="Demo"></p>
+<p>正方形改变大小和方向以反映估计的场景深度，并以动效形式在打开和关闭状态间切换，以指示ARKit是否检测到适合放置虚拟对象的平面。在用户放置虚拟对象后，焦点正方形小时，保持隐藏状态，直到用户将相机指向另一个表面。</p>
+<p><strong>当用户放置一个虚拟对象时要做出适当的响应</strong>。当用户选择要放置的虚拟对象时，示例app的 setPosition(_:relativeTo:smoothMovement) 方法使用 FocusSquare 对象的简单启发式方法将虚拟对象放置于屏幕中间的大致现实的位置，即使ARKit没有在那个地方发现一个平面。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">guard</span> <span class="keyword">let</span> cameraTransform = session.currentFrame?.camera.transform,</div><div class="line">    <span class="keyword">let</span> focusSquarePosition = focusSquare.lastPosition <span class="keyword">else</span> &#123;</div><div class="line">    statusViewController.showMessage(<span class="string">"CANNOT PLACE OBJECT\nTry moving left or right."</span>)</div><div class="line">    <span class="keyword">return</span></div><div class="line">&#125;</div><div class="line">        </div><div class="line">virtualObjectInteraction.selectedObject = virtualObject</div><div class="line">virtualObject.setPosition(focusSquarePosition, relativeTo: cameraTransform, smoothMovement: <span class="literal">false</span>)</div><div class="line">        </div><div class="line">updateQueue.async &#123;</div><div class="line">    <span class="keyword">self</span>.sceneView.scene.rootNode.addChildNode(virtualObject)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个位置可能不是用户想要放置虚拟对象的真实世界表面的精确估计，但它足够接近，以快速地将物体添加到屏幕上。</p>
+<p>随着时间的推移，ARKit 会检测平面并提高其位置的估计值，调用 <a href="https://developer.apple.com/documentation/arkit/arscnviewdelegate/2865794-renderer" target="_blank" rel="external">renderer(_:didAdd:for:)</a> 和 <a href="https://developer.apple.com/documentation/arkit/arscnviewdelegate/2865799-renderer" target="_blank" rel="external">renderer(_:didUpdate:for:)</a> 委托方法来报告结果。在这些方法中，示例app调用其 <code>adjustOntoPlaneAnchor(_:using:)</code> 方法来确定之前放置的虚拟对象是否靠近检测到的平面。如果靠近，该方法使用微妙的动画将虚拟对象移动到检测到的平面上，受益于ARKit在该位置对现实世界表面的精确估计，是虚拟对象看起来在用户选择的位置：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Move onto the plane if it is near it (within 5 centimeters).</span></div><div class="line"><span class="keyword">let</span> verticalAllowance: <span class="type">Float</span> = <span class="number">0.05</span></div><div class="line"><span class="keyword">let</span> epsilon: <span class="type">Float</span> = <span class="number">0.001</span> <span class="comment">// Do not update if the difference is less than 1 mm.</span></div><div class="line"><span class="keyword">let</span> distanceToPlane = <span class="built_in">abs</span>(planePosition.y)</div><div class="line"><span class="keyword">if</span> distanceToPlane &gt; epsilon &amp;&amp; distanceToPlane &lt; verticalAllowance &#123;</div><div class="line">    <span class="type">SCNTransaction</span>.begin()</div><div class="line">    <span class="type">SCNTransaction</span>.animationDuration = <span class="type">CFTimeInterval</span>(distanceToPlane * <span class="number">500</span>) <span class="comment">// Move 2 mm per second.</span></div><div class="line">    <span class="type">SCNTransaction</span>.animationTimingFunction = <span class="type">CAMediaTimingFunction</span>(name: kCAMediaTimingFunctionEaseInEaseOut)</div><div class="line">    position.y = anchor.transform.columns.<span class="number">3</span>.y</div><div class="line">    <span class="type">SCNTransaction</span>.commit()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="用户与虚拟对象的交互"><a href="#用户与虚拟对象的交互" class="headerlink" title="用户与虚拟对象的交互"></a>用户与虚拟对象的交互</h2><p><strong>允许用户使用标准的、熟悉的手势与虚拟对象直接进行交互。</strong>该示例app使用单指轻拍，单/双指平移，双指旋转手势识别，以使用户放置和旋转虚拟对象。示例app的代码中 <code>VirtualObjectInteraction</code> 类管理这些手势。</p>
+<p><strong>一般来说，要保持交互简单。</strong>当拖动一个虚拟对象时（参见 <code>translate(_:basedOn:infinitePlane:)</code> 方法），示例app将虚拟对象的移动限制在它被放置的二维平面上。类似的，由于虚拟对象停留在水平面上，旋转手势（参见 <code>didRotate(_:)</code> 方法）只能绕着垂直轴来旋转对象，以使得对象保持在平面上。</p>
+<p><strong>在合理接近交互式虚拟对象时对用户手势做出响应。</strong>示例代码的 <code>objectInteracting(with:in:)</code> 方法使用手势识别器提供的触摸位置执行hit测试。通过针对虚拟对象边界框进行hit测试，该方法使得即使用户触摸位置不在虚拟对象的可见内容的点上，用户触摸也有可能影响虚拟对象。通过对多点触摸手势执行多个hit测试，该方法使得用户触摸更有可能影响预期的对象：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> index <span class="keyword">in</span> <span class="number">0</span>..&lt;gesture.numberOfTouches &#123;</div><div class="line">    <span class="keyword">let</span> touchLocation = gesture.location(ofTouch: index, <span class="keyword">in</span>: view)</div><div class="line">    </div><div class="line">    <span class="comment">// Look for an object directly under the `touchLocation`.</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> object = sceneView.virtualObject(at: touchLocation) &#123;</div><div class="line">        <span class="keyword">return</span> object</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">        </div><div class="line"><span class="comment">// As a last resort look for an object under the center of the touches.</span></div><div class="line"><span class="keyword">return</span> sceneView.virtualObject(at: gesture.center(<span class="keyword">in</span>: view))</div></pre></td></tr></table></figure>
+<p><strong>考虑用户启动的对象缩放是否必要。</strong> 这个AR app放置了可能自然出现在用户真实环境中的逼真虚拟对象，因此保留虚拟对象的固有尺寸有助于保持真实感。因此，该app没有添加手势或者其他UI来启用虚拟对象缩放。此外，通过不使用缩放手势，示例app防止用户对手势调整虚拟对象大小 或 改变虚拟对象与相机的距离 产生困惑。（如果你选择再app中启动虚拟对象缩放，请使用pinch捏合手势。）</p>
+<p><strong>警惕潜在的冲突手势。</strong>示例app的 <code>ThresholdPanGesture</code> 类是一个 <a href="https://developer.apple.com/documentation/uikit/uipangesturerecognizer" target="_blank" rel="external">UIPanGestureRecognizer</a> 子类，它提供了一种方法，延迟手势识别器效果，直到手势正在进行通过指定的移动阈值。示例app的<code>touchesMoved(with:)</code> 方法使用该类来让用户在单指拖动虚拟对象手势和双指旋转对象手势间平滑过渡：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">touchesMoved</span><span class="params">(<span class="number">_</span> touches: Set&lt;UITouch&gt;, with event: UIEvent)</span></span> &#123;</div><div class="line">    <span class="keyword">super</span>.touchesMoved(touches, with: event)</div><div class="line">    </div><div class="line">    <span class="keyword">let</span> translationMagnitude = translation(<span class="keyword">in</span>: view).length</div><div class="line">    </div><div class="line">    <span class="comment">// Adjust the threshold based on the number of touches being used.</span></div><div class="line">    <span class="keyword">let</span> threshold = <span class="type">ThresholdPanGesture</span>.threshold(forTouchCount: touches.<span class="built_in">count</span>)</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> !isThresholdExceeded &amp;&amp; translationMagnitude &gt; threshold &#123;</div><div class="line">        isThresholdExceeded = <span class="literal">true</span></div><div class="line">        </div><div class="line">        <span class="comment">// Set the overall translation to zero as the gesture should now begin.</span></div><div class="line">        setTranslation(.zero, <span class="keyword">in</span>: view)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>确保虚拟对象的移动平稳。</strong>示例app的 <code>setPosition(_:relativeTo:smoothMovement)</code> 方法在触摸手势引起的拖动虚拟对象位置 和 该对象近期位置之间插值。通过平均 基于相机距离的近期位置，该方法产生平滑的拖动移动，而不会使 被拖动物体滞后于用户的手势：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> smoothMovement &#123;</div><div class="line">    <span class="keyword">let</span> hitTestResultDistance = simd_length(positionOffsetFromCamera)</div><div class="line">    </div><div class="line">    <span class="comment">// Add the latest position and keep up to 10 recent distances to smooth with.</span></div><div class="line">    recentVirtualObjectDistances.append(hitTestResultDistance)</div><div class="line">    recentVirtualObjectDistances = <span class="type">Array</span>(recentVirtualObjectDistances.suffix(<span class="number">10</span>))</div><div class="line">    </div><div class="line">    <span class="keyword">let</span> averageDistance = recentVirtualObjectDistances.average!</div><div class="line">    <span class="keyword">let</span> averagedDistancePosition = simd_normalize(positionOffsetFromCamera) * averageDistance</div><div class="line">    simdPosition = cameraWorldPosition + averagedDistancePosition</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    simdPosition = cameraWorldPosition + positionOffsetFromCamera</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>探索更吸引用户的交互方法。</strong>在AR体验中，pan平移手势（将手指移动到设备的屏幕上）并不是将虚拟对象拖动到新位置的唯一自然方式。用户也可以在移动设备时直观地将手指一直放置在虚拟对象上，从而将虚拟对象拖到AR场景中的新位置。</p>
+<p>即使手势在屏幕上的触摸位置没有改变，示例app也通过在拖动手势时不断的调用其 <code>updateObjectToCurrentTrackingPosition()</code> 方法来支持这种手势。若设备在拖动过程中发生移动，则该方法会计算其对应于触摸位置的新的现实位置，并相应地移动虚拟对象。</p>
+<h2 id="进入AR"><a href="#进入AR" class="headerlink" title="进入AR"></a>进入AR</h2><p><strong>指示用户何时进行初始化。</strong>该示例app通过文本提示显示有关AR session状态，通过浮动的文本视图显示与AR进行交互的说明。示例app的 <code>StatusViewController</code> 类管理此视图，可显示短暂的说明，该说明允许用户在读取它们之后消失，或显示始终保持可见的重要状态信息直至用户纠正问题。</p>
+<p><img src="https://docs-assets.developer.apple.com/published/f385e426f2/d665844f-2945-44f9-9896-06a1bb53251a.png" alt="image"></p>
+<h2 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h2><p><strong>如果不符合用户的期望可以重置。</strong>示例app具有一个始终在UI界面右上角的Reset重置按钮，允许用户重启AR体验不管其状态如何。参见示例代码的 <code>restartExperience()</code> 方法。</p>
+<p><strong>仅在支持的设备上提供AR功能</strong>。示例App的核心功能需要使用ARKit，因此它在Info.plist文件的 <a href="https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html#//apple_ref/doc/uid/TP40009252-SW3" target="_blank" rel="external">UIRequiredDeviceCapabilities</a> 部分定义了 arkit 键。在部署构建的项目时，该键的设置可以防止在不支持ARKit的设备上安装。</p>
+<p>如果你的应用把ARKit作为辅助功能，请使用 <a href="https://developer.apple.com/documentation/arkit/arconfiguration/2923553-issupported" target="_blank" rel="external">isSupported</a> 方法确定是否需要隐藏 ARKit 功能。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/wechat-reward-image.JPG" alt="黄帅 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/alipay-reward-image.JPG" alt="黄帅 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ARKit/" rel="tag">#ARKit</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/24/2017-11-24-ARKit入门-0/" rel="next" title="ARKit入门-建立第一个AR体验">
+                <i class="fa fa-chevron-left"></i> ARKit入门-建立第一个AR体验
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar-hus.jpg"
+               alt="黄帅" />
+          <p class="site-author-name" itemprop="name">黄帅</p>
+          <p class="site-description motion-element" itemprop="description">说我能做的，做我说过的。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2189929640" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/huangshuai-IOT" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://yuhaomin.github.io" title="女票的博客😘" target="_blank">女票的博客😘</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://52chat.cc/" title="松哥的论坛" target="_blank">松哥的论坛</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://eliyar.biz/" title="Eliyar's Blog" target="_blank">Eliyar's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://swifter.tips/" title="Swifter Tips" target="_blank">Swifter Tips</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#放置虚拟对象"><span class="nav-number">2.</span> <span class="nav-text">放置虚拟对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户与虚拟对象的交互"><span class="nav-number">3.</span> <span class="nav-text">用户与虚拟对象的交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进入AR"><span class="nav-number">4.</span> <span class="nav-text">进入AR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决问题"><span class="nav-number">5.</span> <span class="nav-text">解决问题</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黄帅</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+<div>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259995403'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1259995403%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'https-huangshuai-iot-github-io';
+      var disqus_identifier = '2017/11/24/2017-11-24-ARKit入门-1/';
+      var disqus_title = "ARKit入门-在AR中处理3D交互和UI控制";
+      var disqus_url = 'https://huangshuai-iot.github.io/2017/11/24/2017-11-24-ARKit入门-1/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

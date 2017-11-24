@@ -1,0 +1,806 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ARKit,翻译," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="黄帅的博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="翻译自 Building Your First AR Experience 
+
+创建一个运行AR session并利用平面检测使用SceneKit来放置3D内容的app。
+概述这个示例app运行一个 ARKit 现实追踪 session，并且在 SceneKit 视图中显示内容。为了演示平面检测，这个app仅放置一个 SCNPlane 对象来可视化每个检测到的 ARPlaneAnchor 对象。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ARKit入门-建立第一个AR体验">
+<meta property="og:url" content="https://huangshuai-iot.github.io/2017/11/24/2017-11-24-ARKit入门-0/index.html">
+<meta property="og:site_name" content="黄帅的博客">
+<meta property="og:description" content="翻译自 Building Your First AR Experience 
+
+创建一个运行AR session并利用平面检测使用SceneKit来放置3D内容的app。
+概述这个示例app运行一个 ARKit 现实追踪 session，并且在 SceneKit 视图中显示内容。为了演示平面检测，这个app仅放置一个 SCNPlane 对象来可视化每个检测到的 ARPlaneAnchor 对象。">
+<meta property="og:image" content="https://huangshuai-iot.github.io/media/15113476634025/15113487703253.jpg">
+<meta property="og:updated_time" content="2017-11-24T12:09:07.084Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ARKit入门-建立第一个AR体验">
+<meta name="twitter:description" content="翻译自 Building Your First AR Experience 
+
+创建一个运行AR session并利用平面检测使用SceneKit来放置3D内容的app。
+概述这个示例app运行一个 ARKit 现实追踪 session，并且在 SceneKit 视图中显示内容。为了演示平面检测，这个app仅放置一个 SCNPlane 对象来可视化每个检测到的 ARPlaneAnchor 对象。">
+<meta name="twitter:image" content="https://huangshuai-iot.github.io/media/15113476634025/15113487703253.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://huangshuai-iot.github.io/2017/11/24/2017-11-24-ARKit入门-0/"/>
+
+  <title> ARKit入门-建立第一个AR体验 | 黄帅的博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?de241358bbb90d3e97f1f8486e6d5b41";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s6.cnzz.com/stat.php?id=1259995403&web_id=1259995403" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">黄帅的博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Just I decided.</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'yQ1raifaH1s316jSamV8','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ARKit入门-建立第一个AR体验
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-11-24T20:01:14+08:00" content="2017-11-24">
+              2017-11-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ARKit/" itemprop="url" rel="index">
+                    <span itemprop="name">ARKit</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ARKit/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/11/24/2017-11-24-ARKit入门-0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/11/24/2017-11-24-ARKit入门-0/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>翻译自 <a href="https://developer.apple.com/documentation/arkit/building_your_first_ar_experience" target="_blank" rel="external">Building Your First AR Experience</a> </p>
+</blockquote>
+<p>创建一个运行AR session并利用平面检测使用SceneKit来放置3D内容的app。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>这个示例app运行一个 ARKit 现实追踪 session，并且在 SceneKit 视图中显示内容。为了演示平面检测，这个app仅放置一个 SCNPlane 对象来可视化每个检测到的 ARPlaneAnchor 对象。</p>
+<h2 id="配置并运行-AR-Session"><a href="#配置并运行-AR-Session" class="headerlink" title="配置并运行 AR Session"></a>配置并运行 AR Session</h2><p>ARSCNView 类是一个 SceneKit 视图，包括一个 ARSession 对象，该对象用来管理创建AR体验所需的运动跟踪和图像处理。但是，要运行 AR Session，必须要提供一个 Session 配置。</p>
+<p><img src="media/15113476634025/15113487703253.jpg" alt=""></p>
+<p> ARWorldTrackingConfiguration 类提供高精度的运动跟踪，并且可以帮助你将虚拟内容放置在真实物体表面。要启动 AR Session，请使用你想要的选项（例如平面检测）来创建一个Session配置对象，然后在ARSCNView实例的session对象上调用run方法：</p>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> configuration = <span class="type">ARWorldTrackingConfiguration</span>()</div><div class="line">configuration.planeDetection = .horizontal</div><div class="line">sceneView.session.run(configuration)</div></pre></td></tr></table></figure>
+<p> 只有在屏幕上显示View的时候才运行session。</p>
+<p> <strong>重要：</strong> 如果你的app的核心功能需要使用ARKit，请使用你app的Info.plist文件 UIRequiredDeviceCapabilities 中的 arkit 键，以确保你的app仅在支持ARKit的设备上可用。<br>如果AR只是你app的辅助功能，请使用 isSupported 属性来确定是否提供基于AR的功能。</p>
+<h2 id="在检测到的平面上放置3D内容"><a href="#在检测到的平面上放置3D内容" class="headerlink" title="在检测到的平面上放置3D内容"></a>在检测到的平面上放置3D内容</h2><p>在设置好AR session后，可以使用 SceneKit 来放置虚拟内容在视图里。</p>
+<p>当启用平面检测时，ARKit 为每个检测到的平面 添加和更新 anchors。默认情况下，ARSCNView 类为每个anchor 添加一个 ACNNode 对象到 SceneKit 场景。你的View的代理可以实现  renderer(_:didAdd:for:) 方法来向场景中添加内容。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">renderer</span><span class="params">(<span class="number">_</span> renderer: SCNSceneRenderer, didAdd node: SCNNode, <span class="keyword">for</span> anchor: ARAnchor)</span></span> &#123;</div><div class="line">       <span class="comment">// Place content only for anchors found by plane detection.</span></div><div class="line">       <span class="comment">// 将内容仅用于通过平面检测发现的anchor</span></div><div class="line">       <span class="keyword">guard</span> <span class="keyword">let</span> planeAnchor = anchor <span class="keyword">as</span>? <span class="type">ARPlaneAnchor</span> <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line"></div><div class="line">       <span class="comment">// Create a SceneKit plane to visualize the plane anchor using its position and extent.</span></div><div class="line">       <span class="comment">// 创建一个SceneKit平面，以使用其位置和范围来可视化平面anchor</span></div><div class="line">       <span class="keyword">let</span> plane = <span class="type">SCNPlane</span>(width: <span class="type">CGFloat</span>(planeAnchor.extent.x), height: <span class="type">CGFloat</span>(planeAnchor.extent.z))</div><div class="line">       <span class="keyword">let</span> planeNode = <span class="type">SCNNode</span>(geometry: plane)</div><div class="line">       planeNode.simdPosition = float3(planeAnchor.center.x, <span class="number">0</span>, planeAnchor.center.z)</div><div class="line">       </div><div class="line">       <span class="comment">/*</span></div><div class="line">        `SCNPlane` is vertically oriented in its local coordinate space, so</div><div class="line">        rotate the plane to match the horizontal orientation of `ARPlaneAnchor`.</div><div class="line">       */</div><div class="line">       </div><div class="line">       <span class="comment">/*</span></div><div class="line">       `SCNPlane` 在本地坐标空间中是垂直的，所以 旋转这个平面来匹配 ‘ARPlaneAnchor’ 的水平方向。</div><div class="line">       */</div><div class="line">       planeNode.eulerAngles.x = -.pi / <span class="number">2</span></div><div class="line">       </div><div class="line">       <span class="comment">// Make the plane visualization semitransparent to clearly show real-world placement.</span></div><div class="line">       <span class="comment">//  使平面的可视化半透明，以清楚的显示真实事件的位置。</span></div><div class="line">       planeNode.opacity = <span class="number">0.25</span></div><div class="line">       </div><div class="line">       <span class="comment">/*</span></div><div class="line">        Add the plane visualization to the ARKit-managed node so that it tracks</div><div class="line">        changes in the plane anchor as plane estimation continues.</div><div class="line">       */</div><div class="line">       <span class="comment">/*</span></div><div class="line">       将平面可视化添加到ARKit管理的节点中，以便于跟踪平面anchor的改变，随着平面估计的继续。</div><div class="line">       </div><div class="line">       */</div><div class="line">       node.addChildNode(planeNode)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果将内容添加为与anchor相对应的节点的子节点，ARSCNView类会自动的移动改内容，因为ARKit会优化它对平面位置和范围的估计。为了显示估计平面的全部范围，该示例app还实现了<a href="https://developer.apple.com/documentation/arkit/arscnviewdelegate/2865799-renderer" target="_blank" rel="external">renderer(_:didUpdate:for:) </a>方法，更新SCNPlane对象的大小来反映ARKit提供的估计值。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">renderer</span><span class="params">(<span class="number">_</span> renderer: SCNSceneRenderer, didUpdate node: SCNNode, <span class="keyword">for</span> anchor: ARAnchor)</span></span> &#123;</div><div class="line">    <span class="comment">// Update content only for plane anchors and nodes matching the setup created in `renderer(_:didAdd:for:)`.</span></div><div class="line">    <span class="comment">// 仅更新 平面的anchor ，和在`renderer(_:didAdd:for:)`中创建设置的nodes 匹配的nodes</span></div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> planeAnchor = anchor <span class="keyword">as</span>?  <span class="type">ARPlaneAnchor</span>,</div><div class="line">        <span class="keyword">let</span> planeNode = node.childNodes.first,</div><div class="line">        <span class="keyword">let</span> plane = planeNode.geometry <span class="keyword">as</span>? <span class="type">SCNPlane</span></div><div class="line">        <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</div><div class="line">    </div><div class="line">    <span class="comment">// Plane estimation may shift the center of a plane relative to its anchor's transform.</span></div><div class="line">    <span class="comment">// 平面估计 可能会移动平面的中心，由于其相关联的anchor的中心发生变换。</span></div><div class="line">    planeNode.simdPosition = float3(planeAnchor.center.x, <span class="number">0</span>, planeAnchor.center.z)</div><div class="line">    </div><div class="line">    <span class="comment">/*</span></div><div class="line">     Plane estimation may extend the size of the plane, or combine previously detected</div><div class="line">     planes into a larger one. In the latter case, `ARSCNView` automatically deletes the</div><div class="line">     corresponding node for one plane, then calls this method to update the size of</div><div class="line">     the remaining plane.</div><div class="line">    */</div><div class="line">    <span class="comment">/*</span></div><div class="line">    平面估计可能会增大平面的尺寸，或者与之前检测到的平面结合成一个更大的平面。</div><div class="line">    在后一种情况下，`ARSCNView` 会自动的删除对应平面的节点，然后调用这个方法来更新剩下平面的大小。</div><div class="line">    */</div><div class="line">    plane.width = <span class="type">CGFloat</span>(planeAnchor.extent.x)</div><div class="line">    plane.height = <span class="type">CGFloat</span>(planeAnchor.extent.z)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/wechat-reward-image.JPG" alt="黄帅 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/alipay-reward-image.JPG" alt="黄帅 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ARKit/" rel="tag">#ARKit</a>
+          
+            <a href="/tags/翻译/" rel="tag">#翻译</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/09/HomeKit Accessory开发基础问题/" rel="next" title="非商业用途的 HomeKit 配件开发的常见问题">
+                <i class="fa fa-chevron-left"></i> 非商业用途的 HomeKit 配件开发的常见问题
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/24/2017-11-24-ARKit入门-1/" rel="prev" title="ARKit入门-在AR中处理3D交互和UI控制">
+                ARKit入门-在AR中处理3D交互和UI控制 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar-hus.jpg"
+               alt="黄帅" />
+          <p class="site-author-name" itemprop="name">黄帅</p>
+          <p class="site-description motion-element" itemprop="description">说我能做的，做我说过的。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2189929640" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/huangshuai-IOT" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://yuhaomin.github.io" title="女票的博客😘" target="_blank">女票的博客😘</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://52chat.cc/" title="松哥的论坛" target="_blank">松哥的论坛</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://eliyar.biz/" title="Eliyar's Blog" target="_blank">Eliyar's Blog</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://swifter.tips/" title="Swifter Tips" target="_blank">Swifter Tips</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置并运行-AR-Session"><span class="nav-number">2.</span> <span class="nav-text">配置并运行 AR Session</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在检测到的平面上放置3D内容"><span class="nav-number">3.</span> <span class="nav-text">在检测到的平面上放置3D内容</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黄帅</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+<div>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259995403'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1259995403%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'https-huangshuai-iot-github-io';
+      var disqus_identifier = '2017/11/24/2017-11-24-ARKit入门-0/';
+      var disqus_title = "ARKit入门-建立第一个AR体验";
+      var disqus_url = 'https://huangshuai-iot.github.io/2017/11/24/2017-11-24-ARKit入门-0/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
