@@ -306,6 +306,145 @@
             
               
                 
+                <a class="post-title-link" href="/2017/12/09/2017-12-09-Supervisor使用入门/" itemprop="url">
+                  Supervisor使用入门
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-12-09T19:43:53+08:00" content="2017-12-09">
+              2017-12-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Server/" itemprop="url" rel="index">
+                    <span itemprop="name">Server</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Server/Tools/" itemprop="url" rel="index">
+                    <span itemprop="name">Tools</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/12/09/2017-12-09-Supervisor使用入门/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/09/2017-12-09-Supervisor使用入门/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          前言之前写的一个TCP Server最近部署到生产环境，Server用的Python的Twisted框架，里面虽然有进程守护的功能，但是我之前一直用的Supervisor做后台进程管理，其比较好的是具有一个Web管理界面，可以可视化的控制后台进程的启停，我比较喜欢。
+安装Supervisor由于Supervisor是用python2开发，于是在服务器里就开了一个新的Python虚拟环境，安装了python2.7。直接 pip install supervisor 就好。
+配置Supervisor基本配置123456789101112# 生成配置文件echo_supervisord_conf &gt; /etc/supervisord.conf# 生成后台进程配置文件文件夹mkdir /etc/supervisord.d/# 修改配置文件：vi /etc/supervisord.conf	#
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/12/09/2017-12-09-Supervisor使用入门/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/11/24/2017-11-24-ARKit入门-1/" itemprop="url">
                   ARKit入门-在AR中处理3D交互和UI控制
                 </a>
@@ -1546,146 +1685,6 @@ Xcode7 打包，在同学 Yosemite 下用 Application Loader 上传
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/28/一个UITextView的小Bug/" itemprop="url">
-                  iOS 一个 UITextView 的小 Bug
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-28T14:55:25+08:00" content="2016-07-28">
-              2016-07-28
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/开发/" itemprop="url" rel="index">
-                    <span itemprop="name">开发</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/开发/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/07/28/一个UITextView的小Bug/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/07/28/一个UITextView的小Bug/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          起因今天上午测试提了一个很神奇的Bug，在输入框输入某些iOS自带的表情，删除后会有残留物。例如：💺💺💺看到这个Bug，我的内心是觉得不可能啊。然后亲自试了一下，发现真会这样。至此，我发自内心佩服了我司的测试，这种问题都能发现。
-我想，这仅仅就是一个UITextView，应该不会我写的是个例，于是，我找了微信试了一下,这是微信的个人签名框，在输入完表情后，再删除，可以看到，后面留了一串残留物。我本来想直接关了这个Bug，毕竟微信这种大厂的App都能允许这个Bug。后来一想，也许是他们的测试没有我们的牛逼。
-解决方法微信的这个Bug复现，在保存后再进去，就会发现残留物没有了。所以解决思路是，在UITextView一边输入，一边给它赋值。于是实现了UITextViewDelegate的textViewDidChange方法。
-123456extension FMPersonEditSig
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/28/一个UITextView的小Bug/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1731,7 +1730,7 @@ Xcode7 打包，在同学 Yosemite 下用 Application Loader 上传
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1739,7 +1738,7 @@ Xcode7 打包，在同学 Yosemite 下用 Application Loader 上传
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1748,7 +1747,7 @@ Xcode7 打包，在同学 Yosemite 下用 Application Loader 上传
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
