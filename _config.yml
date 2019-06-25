@@ -4,8 +4,9 @@
 
 # Site
 title: 黄帅的博客
-subtitle: Just I decided.
-description: 说我能做的，做我说过的。
+subtitle:
+description: 说我能做的，做我说过的
+keywords:
 author: 黄帅
 language: zh-Hans
 timezone: Asia/Shanghai
@@ -42,7 +43,16 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
-
+  
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+  
 # Category & Tag
 default_category: uncategorized
 category_map:
@@ -67,16 +77,12 @@ theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
-deploy:
+deploy: 
   type: git
   repo: https://github.com/huangshuai-IOT/huangshuai-IOT.github.io.git
   branch: master
 
-# 多说
-#duoshuo_shortname: huangshuai-iot
 disqus_shortname: https-huangshuai-iot-github-io
 
 # 百度
 baidu_analytics: de241358bbb90d3e97f1f8486e6d5b41
-# Swiftype Search Key
-swiftype_key: yQ1raifaH1s316jSamV8

@@ -1,20 +1,4 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!DOCTYPE html>
 
 
 
@@ -28,113 +12,130 @@
 
 
   
-  
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
 
 
 
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Swift,iOS,Alamofire,GB2312编码," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="黄帅的博客" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
 
 
 
 
 
 
-<meta name="description" content="背景最近在做一个校园工具，其中有个功能是查看自己校园网账户的剩余流量。学校的网络管理中心没有开放接口，于是只能利用Alamofire来模拟登录解析数据。一开始通过GET请求获取用户账户余额都是没有问题的，但是通过POST请求的话，就无法正确访问数据。
-原因之前知道该网站是GB2312编码的，于是在解析data为HTML的时候就用GB2312解码的。但在POST数据时，也需要GB2312编码。我开始">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Swift 使用 Alamofire 实现 GB2312 编码的网络请求">
-<meta property="og:url" content="https://huangshuai-iot.github.io/2016/08/02/使用Alamofire实现GB2312编码的网络请求/index.html">
-<meta property="og:site_name" content="黄帅的博客">
-<meta property="og:description" content="背景最近在做一个校园工具，其中有个功能是查看自己校园网账户的剩余流量。学校的网络管理中心没有开放接口，于是只能利用Alamofire来模拟登录解析数据。一开始通过GET请求获取用户账户余额都是没有问题的，但是通过POST请求的话，就无法正确访问数据。
-原因之前知道该网站是GB2312编码的，于是在解析data为HTML的时候就用GB2312解码的。但在POST数据时，也需要GB2312编码。我开始">
-<meta property="og:updated_time" content="2016-10-12T14:19:20.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift 使用 Alamofire 实现 GB2312 编码的网络请求">
-<meta name="twitter:description" content="背景最近在做一个校园工具，其中有个功能是查看自己校园网账户的剩余流量。学校的网络管理中心没有开放接口，于是只能利用Alamofire来模拟登录解析数据。一开始通过GET请求获取用户账户余额都是没有问题的，但是通过POST请求的话，就无法正确访问数据。
-原因之前知道该网站是GB2312编码的，于是在解析data为HTML的时候就用GB2312解码的。但在POST数据时，也需要GB2312编码。我开始">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: 'Author'
+    version: '7.1.2',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
-
-
-  <link rel="canonical" href="https://huangshuai-iot.github.io/2016/08/02/使用Alamofire实现GB2312编码的网络请求/"/>
-
-  <title> Swift 使用 Alamofire 实现 GB2312 编码的网络请求 | 黄帅的博客 </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
 
-  <script type="text/javascript">
+
+  <meta name="description" content="背景最近在做一个校园工具，其中有个功能是查看自己校园网账户的剩余流量。学校的网络管理中心没有开放接口，于是只能利用Alamofire来模拟登录解析数据。一开始通过GET请求获取用户账户余额都是没有问题的，但是通过POST请求的话，就无法正确访问数据。 原因之前知道该网站是GB2312编码的，于是在解析data为HTML的时候就用GB2312解码的。但在POST数据时，也需要GB2312编码。我开始">
+<meta name="keywords" content="Swift,Alamofire,iOS,GB2312编码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 使用 Alamofire 实现 GB2312 编码的网络请求">
+<meta property="og:url" content="https://huangshuai-iot.github.io/2016/08/02/使用Alamofire实现GB2312编码的网络请求/index.html">
+<meta property="og:site_name" content="黄帅的博客">
+<meta property="og:description" content="背景最近在做一个校园工具，其中有个功能是查看自己校园网账户的剩余流量。学校的网络管理中心没有开放接口，于是只能利用Alamofire来模拟登录解析数据。一开始通过GET请求获取用户账户余额都是没有问题的，但是通过POST请求的话，就无法正确访问数据。 原因之前知道该网站是GB2312编码的，于是在解析data为HTML的时候就用GB2312解码的。但在POST数据时，也需要GB2312编码。我开始">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-16T15:37:13.551Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 使用 Alamofire 实现 GB2312 编码的网络请求">
+<meta name="twitter:description" content="背景最近在做一个校园工具，其中有个功能是查看自己校园网账户的剩余流量。学校的网络管理中心没有开放接口，于是只能利用Alamofire来模拟登录解析数据。一开始通过GET请求获取用户账户余额都是没有问题的，但是通过POST请求的话，就无法正确访问数据。 原因之前知道该网站是GB2312编码的，于是在解析data为HTML的时候就用GB2312解码的。但在POST数据时，也需要GB2312编码。我开始">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://huangshuai-iot.github.io/2016/08/02/使用Alamofire实现GB2312编码的网络请求/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Swift 使用 Alamofire 实现 GB2312 编码的网络请求 | 黄帅的博客</title>
+  
+
+
+
+
+
+
+  <script>
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?de241358bbb90d3e97f1f8486e6d5b41";
+      hm.src = "https://hm.baidu.com/hm.js?de241358bbb90d3e97f1f8486e6d5b41";
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(hm, s);
     })();
@@ -145,144 +146,233 @@
 
 
 
-  <div style="display: none;">
-    <script src="//s6.cnzz.com/stat.php?id=1259995403&web_id=1259995403" type="text/javascript"></script>
-  </div>
 
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
 
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">黄帅的博客</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">黄帅的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
   </div>
-  <p class="site-subtitle">Just I decided.</p>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
+
 
 <nav class="site-nav">
-  
-
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
       
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
       
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>Sitemap</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
+
+  </li>
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="st-search-show-outputs">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
       
     </ul>
   
 
   
-    <div class="site-search">
-      
-  <form class="site-search-form">
-  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-</form>
+    
 
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+  
 
-  _st('install', 'yQ1raifaH1s316jSamV8','2.0.0');
-</script>
-
-
-
-    </div>
   
 </nav>
 
- </div>
+
+
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
           <div id="content" class="content">
             
 
@@ -290,24 +380,37 @@
     
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://huangshuai-iot.github.io/2016/08/02/使用Alamofire实现GB2312编码的网络请求/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄帅">
+      <meta itemprop="description" content="说我能做的，做我说过的">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="黄帅的博客">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Swift 使用 Alamofire 实现 GB2312 编码的网络请求
+          <h1 class="post-title" itemprop="name headline">Swift 使用 Alamofire 实现 GB2312 编码的网络请求
+
               
             
           </h1>
@@ -315,70 +418,93 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-02T14:04:58+08:00" content="2016-08-02">
-              2016-08-02
-            </time>
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-08-02 14:04:58" itemprop="dateCreated datePublished" datetime="2016-08-02T14:04:58+08:00">2016-08-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-16 23:37:13" itemprop="dateModified" datetime="2019-06-16T23:37:13+08:00">2019-06-16</time>
+              
+            
           </span>
 
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/开发/" itemprop="url" rel="index">
-                    <span itemprop="name">开发</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
+                <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/开发/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/开发/" itemprop="url" rel="index"><span itemprop="name">开发</span></a></span>
 
                 
                 
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/开发/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
 
+                
+                
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/02/使用Alamofire实现GB2312编码的网络请求/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/02/使用Alamofire实现GB2312编码的网络请求/" itemprop="commentsCount"></span>
-                </a>
-              </span>
             
           
 
           
-
-          
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -387,72 +513,64 @@
       
         <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>最近在做一个校园工具，其中有个功能是查看自己校园网账户的剩余流量。学校的网络管理中心没有开放接口，于是只能利用Alamofire来模拟登录解析数据。一开始通过GET请求获取用户账户余额都是没有问题的，但是通过POST请求的话，就无法正确访问数据。</p>
 <h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>之前知道该网站是GB2312编码的，于是在解析data为HTML的时候就用GB2312解码的。但在POST数据时，也需要GB2312编码。我开始时将post的string参数用GB2312编码，发现不行。于是就查看了Alamofire的源码，发现其默认的参数编码是UTF-8，而且只有这一个选择😂。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> mutableURLRequest.valueForHTTPHeaderField(<span class="string">"Content-Type"</span>) == <span class="literal">nil</span> &#123;</div><div class="line">    mutableURLRequest.setValue(<span class="string">"application/x-www-form-urlencoded; charset=utf-8"</span>,forHTTPHeaderField: <span class="string">"Content-Type"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> mutableURLRequest.valueForHTTPHeaderField(<span class="string">"Content-Type"</span>) == <span class="literal">nil</span> &#123;</span><br><span class="line">    mutableURLRequest.setValue(<span class="string">"application/x-www-form-urlencoded; charset=utf-8"</span>,forHTTPHeaderField: <span class="string">"Content-Type"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>这样就很尴尬了。在Google搜了半天，也没找到类似的问题。于是问了我一个经常抓包的哥们，他说GB2312编码的服务器遇到的次数非常少。再加上本来用swift模拟请求的场景就不多了，难怪没同样的问题呢。试了很久，我都准备鸣金收兵了。</p>
 <h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>后来问了学长这个问题，他说可以自定义Alamofire的request，在request中进行参数的GB2312编码或许可以。于是带着最后一丝希望去试了一下，发现学长真行🤗。</p>
-<p>自定义Alamofire的request代码如下：<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> <span class="type">GB2312Encoding</span> = <span class="type">CFStringConvertEncodingToNSStringEncoding</span>(<span class="number">0x0632</span>)</div><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">urlRequestWithComponents</span><span class="params">(urlString:String,parameters:[String: AnyObject])</span></span> -&gt;(<span class="type">URLRequestConvertible</span>,<span class="type">NSData</span>) &#123;</div><div class="line">        </div><div class="line">    <span class="comment">// create  url request to send</span></div><div class="line">    <span class="keyword">let</span> mutableURLRequest = <span class="type">NSMutableURLRequest</span>(<span class="type">URL</span>: <span class="type">NSURL</span>(string: urlString)!)</div><div class="line">    mutableURLRequest.<span class="type">HTTPMethod</span> = <span class="type">Alamofire</span>.<span class="type">Method</span>.<span class="type">POST</span>.rawValue</div><div class="line">    <span class="keyword">let</span> contentType = <span class="string">"application/x-www-form-urlencoded"</span></div><div class="line">    mutableURLRequest.setValue(contentType, forHTTPHeaderField: <span class="string">"Content-Type"</span>)</div><div class="line">    mutableURLRequest.setValue(<span class="string">"*******"</span>, forHTTPHeaderField: <span class="string">"Referer"</span>)</div><div class="line">        </div><div class="line">    <span class="comment">// add parameters</span></div><div class="line">    <span class="keyword">let</span> uploadData = <span class="type">NSMutableData</span>()</div><div class="line">    <span class="keyword">for</span> (key,value) <span class="keyword">in</span> parameters &#123;</div><div class="line">        uploadData.appendData(<span class="string">"<span class="subst">\(key)</span>=<span class="subst">\(value)</span>&amp;"</span>.dataUsingEncoding(<span class="type">GB2312Encoding</span>)!)</div><div class="line">    &#125;</div><div class="line">        </div><div class="line">    <span class="keyword">return</span> (<span class="type">Alamofire</span>.<span class="type">ParameterEncoding</span>.<span class="type">URL</span>.encode(mutableURLRequest, parameters: <span class="literal">nil</span>).<span class="number">0</span>,uploadData)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>自定义Alamofire的request代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="type">GB2312Encoding</span> = <span class="type">CFStringConvertEncodingToNSStringEncoding</span>(<span class="number">0x0632</span>)</span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">urlRequestWithComponents</span><span class="params">(urlString:String,parameters:[String: AnyObject])</span></span> -&gt;(<span class="type">URLRequestConvertible</span>,<span class="type">NSData</span>) &#123;</span><br><span class="line">        </span><br><span class="line">    <span class="comment">// create  url request to send</span></span><br><span class="line">    <span class="keyword">let</span> mutableURLRequest = <span class="type">NSMutableURLRequest</span>(<span class="type">URL</span>: <span class="type">NSURL</span>(string: urlString)!)</span><br><span class="line">    mutableURLRequest.<span class="type">HTTPMethod</span> = <span class="type">Alamofire</span>.<span class="type">Method</span>.<span class="type">POST</span>.rawValue</span><br><span class="line">    <span class="keyword">let</span> contentType = <span class="string">"application/x-www-form-urlencoded"</span></span><br><span class="line">    mutableURLRequest.setValue(contentType, forHTTPHeaderField: <span class="string">"Content-Type"</span>)</span><br><span class="line">    mutableURLRequest.setValue(<span class="string">"*******"</span>, forHTTPHeaderField: <span class="string">"Referer"</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="comment">// add parameters</span></span><br><span class="line">    <span class="keyword">let</span> uploadData = <span class="type">NSMutableData</span>()</span><br><span class="line">    <span class="keyword">for</span> (key,value) <span class="keyword">in</span> parameters &#123;</span><br><span class="line">        uploadData.appendData(<span class="string">"\(key)=\(value)&amp;"</span>.dataUsingEncoding(<span class="type">GB2312Encoding</span>)!)</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> (<span class="type">Alamofire</span>.<span class="type">ParameterEncoding</span>.<span class="type">URL</span>.encode(mutableURLRequest, parameters: <span class="literal">nil</span>).<span class="number">0</span>,uploadData)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>调用该自定义Request的方法如下：</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> urlRequest = urlRequestWithComponents(<span class="type">SchoolNetWorkBaseURL</span>, parameters: parameters)</div><div class="line"><span class="type">Alamofire</span>.upload(urlRequest.<span class="number">0</span>, data: urlRequest.<span class="number">1</span>).response &#123;</div><div class="line">    request, response, data, error <span class="keyword">in</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> urlRequest = urlRequestWithComponents(<span class="type">SchoolNetWorkBaseURL</span>, parameters: parameters)</span><br><span class="line"><span class="type">Alamofire</span>.upload(urlRequest.<span class="number">0</span>, data: urlRequest.<span class="number">1</span>).response &#123;</span><br><span class="line">    request, response, data, error <span class="keyword">in</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>通过这个，就可以实现使用Alamofire实现GB2312编码的请求了。</p>
 <h1 id="番外篇：关于使用Alamofire实现gzip压缩参数的网络请求"><a href="#番外篇：关于使用Alamofire实现gzip压缩参数的网络请求" class="headerlink" title="番外篇：关于使用Alamofire实现gzip压缩参数的网络请求"></a>番外篇：关于使用Alamofire实现gzip压缩参数的网络请求</h1><p>在解决上面的问题时，我一度偏失了方向，以为是参数没有压缩的问题。下面记录一下gzip压缩的参数问题。</p>
 <p>下面是对ParameterEncoding的扩展，Alamofire在请求的request的encoding中，选择ParameterEncoding.gzipped即可。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  ParameterEncoding-Extension.swift</span></div><div class="line"><span class="comment">//  AHNUer</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="comment">//  Created by 黄帅 on 16/7/28.</span></div><div class="line"><span class="comment">//  Copyright © 2016年 帅帅. All rights reserved.</span></div><div class="line"><span class="comment">//</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="keyword">import</span> Alamofire</div><div class="line"></div><div class="line"><span class="comment">// Actual gzipping from https://github.com/1024jp/NSData-GZIP</span></div><div class="line"></div><div class="line"><span class="comment">// Example: ParameterEncoding.JSON.gzipped</span></div><div class="line"></div><div class="line"><span class="keyword">infix</span> <span class="keyword">operator</span> • &#123; <span class="keyword">associativity</span> <span class="keyword">left</span> &#125;</div><div class="line"><span class="function"><span class="keyword">func</span> • &lt;A, B, C&gt;<span class="params">(f: B -&gt; C, g: A -&gt; B)</span></span> -&gt; <span class="type">A</span> -&gt; <span class="type">C</span> &#123;</div><div class="line">    <span class="keyword">return</span> &#123; x <span class="keyword">in</span> f(g(x)) &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">ParameterEncoding</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> gzipped:<span class="type">ParameterEncoding</span> &#123;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> gzip(<span class="keyword">self</span>)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">gzip</span><span class="params">(encoding:ParameterEncoding)</span></span> -&gt; <span class="type">ParameterEncoding</span> &#123;</div><div class="line">        </div><div class="line">        <span class="keyword">let</span> gzipEncoding = <span class="keyword">self</span>.gzipOrError • encoding.encode</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> <span class="type">ParameterEncoding</span>.<span class="type">Custom</span>(gzipEncoding)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">gzipOrError</span><span class="params">(request:NSURLRequest, error:NSError?)</span></span> -&gt; (<span class="type">NSMutableURLRequest</span>, <span class="type">NSError</span>?) &#123;</div><div class="line">        </div><div class="line">        <span class="keyword">let</span> mutableRequest = request.mutableCopy() <span class="keyword">as</span>! <span class="type">NSMutableURLRequest</span></div><div class="line">        </div><div class="line">        <span class="keyword">if</span> error != <span class="literal">nil</span> &#123;</div><div class="line">            <span class="keyword">return</span> (mutableRequest, error)</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">var</span> gzipEncodingError: <span class="type">NSError</span>? = <span class="literal">nil</span></div><div class="line">        </div><div class="line">        <span class="keyword">do</span> &#123;</div><div class="line">            <span class="keyword">let</span> gzippedData = <span class="keyword">try</span> mutableRequest.<span class="type">HTTPBody</span>?.gzippedData()</div><div class="line">            mutableRequest.<span class="type">HTTPBody</span> = gzippedData</div><div class="line">            </div><div class="line">            <span class="keyword">if</span> mutableRequest.<span class="type">HTTPBody</span> != <span class="literal">nil</span> &#123;</div><div class="line">                mutableRequest.setValue(<span class="string">"gzip"</span>, forHTTPHeaderField: <span class="string">"Content-Encoding"</span>)</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> &#123;</div><div class="line">            gzipEncodingError = error <span class="keyword">as</span> <span class="type">NSError</span></div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> (mutableRequest, gzipEncodingError)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  ParameterEncoding-Extension.swift</span></span><br><span class="line"><span class="comment">//  AHNUer</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//  Created by 黄帅 on 16/7/28.</span></span><br><span class="line"><span class="comment">//  Copyright © 2016年 帅帅. All rights reserved.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Foundation</span><br><span class="line"><span class="keyword">import</span> Alamofire</span><br><span class="line"></span><br><span class="line"><span class="comment">// Actual gzipping from https://github.com/1024jp/NSData-GZIP</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Example: ParameterEncoding.JSON.gzipped</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">infix</span> <span class="keyword">operator</span> • &#123; <span class="keyword">associativity</span> <span class="keyword">left</span> &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> • &lt;A, B, C&gt;<span class="params">(f: B -&gt; C, g: A -&gt; B)</span></span> -&gt; <span class="type">A</span> -&gt; <span class="type">C</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123; x <span class="keyword">in</span> f(g(x)) &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">ParameterEncoding</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> gzipped:<span class="type">ParameterEncoding</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> gzip(<span class="keyword">self</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">gzip</span><span class="params">(encoding:ParameterEncoding)</span></span> -&gt; <span class="type">ParameterEncoding</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> gzipEncoding = <span class="keyword">self</span>.gzipOrError • encoding.encode</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="type">ParameterEncoding</span>.<span class="type">Custom</span>(gzipEncoding)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">gzipOrError</span><span class="params">(request:NSURLRequest, error:NSError?)</span></span> -&gt; (<span class="type">NSMutableURLRequest</span>, <span class="type">NSError?</span>) &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> mutableRequest = request.mutableCopy() <span class="keyword">as</span>! <span class="type">NSMutableURLRequest</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> error != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> (mutableRequest, error)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> gzipEncodingError: <span class="type">NSError?</span> = <span class="literal">nil</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> gzippedData = <span class="keyword">try</span> mutableRequest.<span class="type">HTTPBody?</span>.gzippedData()</span><br><span class="line">            mutableRequest.<span class="type">HTTPBody</span> = gzippedData</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> mutableRequest.<span class="type">HTTPBody</span> != <span class="literal">nil</span> &#123;</span><br><span class="line">                mutableRequest.setValue(<span class="string">"gzip"</span>, forHTTPHeaderField: <span class="string">"Content-Encoding"</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">            gzipEncodingError = error <span class="keyword">as</span> <span class="type">NSError</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> (mutableRequest, gzipEncodingError)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ul>
-<li><a href="http://www.hangge.com/blog/cache/detail_1032.html" target="_blank" rel="external">Swift - 使用gzip压缩NSData数据</a></li>
-<li><a href="https://gist.github.com/blender/923f1c1de2f00514ed12" target="_blank" rel="external">blender/ParameterEncodingExt</a></li>
+<li><a href="http://www.hangge.com/blog/cache/detail_1032.html" target="_blank" rel="noopener">Swift - 使用gzip压缩NSData数据</a></li>
+<li><a href="https://gist.github.com/blender/923f1c1de2f00514ed12" target="_blank" rel="noopener">blender/ParameterEncodingExt</a></li>
 </ul>
 
       
     </div>
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/uploads/wechat-reward-image.JPG" alt="黄帅 WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="/uploads/alipay-reward-image.JPG" alt="黄帅 Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
-  </div>
+    
 
-
+    
       
-    </div>
+    
+    
+
+    
 
     <footer class="post-footer">
       
+        
+          
+        
         <div class="post-tags">
           
-            <a href="/tags/Swift/" rel="tag">#Swift</a>
+            <a href="/tags/Swift/" rel="tag"># Swift</a>
           
-            <a href="/tags/iOS/" rel="tag">#iOS</a>
+            <a href="/tags/Alamofire/" rel="tag"># Alamofire</a>
           
-            <a href="/tags/Alamofire/" rel="tag">#Alamofire</a>
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
           
-            <a href="/tags/GB2312编码/" rel="tag">#GB2312编码</a>
+            <a href="/tags/GB2312编码/" rel="tag"># GB2312编码</a>
           
         </div>
+      
+
+      
+      
       
 
       
@@ -464,6 +582,8 @@
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -478,31 +598,21 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
           </div>
           
 
+  
 
-          
-  <div class="comments" id="comments">
-    
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
-  </div>
 
 
         </div>
@@ -524,133 +634,181 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar-hus.jpg"
-               alt="黄帅" />
-          <p class="site-author-name" itemprop="name">黄帅</p>
-          <p class="site-description motion-element" itemprop="description">说我能做的，做我说过的。</p>
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">黄帅</p>
+              <div class="site-description motion-element" itemprop="description">说我能做的，做我说过的</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
         </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">16</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">8</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">29</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/u/2189929640" target="_blank" title="微博">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  微博
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/huangshuai-IOT" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              友情链接
-            </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="https://yuhaomin.github.io" title="女票的博客😘" target="_blank">女票的博客😘</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://52chat.cc/" title="松哥的论坛" target="_blank">松哥的论坛</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="https://eliyar.biz/" title="Eliyar's Blog" target="_blank">Eliyar's Blog</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://swifter.tips/" title="Swifter Tips" target="_blank">Swifter Tips</a>
-                </li>
-              
-            </ul>
-          </div>
-        
-
-      </section>
+      </div>
 
       
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
-              
             
+            
+            
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原因"><span class="nav-number">2.</span> <span class="nav-text">原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决"><span class="nav-number">3.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#番外篇：关于使用Alamofire实现gzip压缩参数的网络请求"><span class="nav-number">4.</span> <span class="nav-text">番外篇：关于使用Alamofire实现gzip压缩参数的网络请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
+
           </div>
-        </section>
+        </div>
+      <!--/noindex-->
+      
+
       
 
     </div>
   </aside>
+  
 
 
         
@@ -659,45 +817,61 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2015 - 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">黄帅</span>
+
+  
+
+  
 </div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
 
-<div>
-<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259995403'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1259995403%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
-</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.2</div>
+
+
+
 
         
+
+
+
+
+
+
+
 
         
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
   </div>
 
   
 
-<script type="text/javascript">
+<script>
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
     window.Promise = null;
   }
@@ -711,85 +885,99 @@
 
 
 
-  
 
 
 
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
-  
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+
+
+
 
 
 
   
-  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
 
 
 
   
 
 
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
 
   
 
-    <script type="text/javascript">
-      var disqus_shortname = 'https-huangshuai-iot-github-io';
-      var disqus_identifier = '2016/08/02/使用Alamofire实现GB2312编码的网络请求/';
-      var disqus_title = "Swift 使用 Alamofire 实现 GB2312 编码的网络请求";
-      var disqus_url = 'https://huangshuai-iot.github.io/2016/08/02/使用Alamofire实现GB2312编码的网络请求/';
+  
 
-      function run_disqus_script(disqus_script){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
+  
 
-      run_disqus_script('count.js');
-      
-        run_disqus_script('embed.js');
-      
-    </script>
+  
+
+
+  
+
+
   
 
 
 
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
   
 
   

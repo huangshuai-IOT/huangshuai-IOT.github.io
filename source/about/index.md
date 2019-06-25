@@ -7,11 +7,5 @@ comments: false
 
 <p style="text-align:center"> 对物联网相关技术有着浓厚兴趣，具有实现想法的学习动力和软硬件开发能力</p>
 
-<p style="text-align:center">目前 某风TV iOS 开发实习</p>
-
-<p style="text-align:center">iOS、Arduino、Python、MongoDB爱好者</p>
-
-<p style="text-align:center">乐于接受新玩意儿、新知识、新技术</p>
-
 <p style="text-align:center">热爱技术、热爱生活、热爱团队合作</p>
 

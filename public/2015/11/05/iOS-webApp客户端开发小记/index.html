@@ -1,20 +1,4 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!DOCTYPE html>
 
 
 
@@ -28,119 +12,130 @@
 
 
   
-  
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
 
 
 
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Swift,iOS,UIWebView,二维码扫描," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="黄帅的博客" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
 
 
 
 
 
 
-<meta name="description" content="这篇文章，现在是我写的第二遍，因为就在我刚才准备commit的时候，手贱点了sync，结果白写了一个小时。
-
-前言暑期以来我一直在一家物联网公司实习，刚来的时候开发了一款物联网云服务的iOS客户端，也许你会问为啥一个实习生刚来就开发产品，主要原因是我能力超强，还有一个很小的原因是全公司就我用Mac，并且会点点Swift，哈哈。
-刚来是开发一款物联网应用的iOS客户端（1.0版本现在已上线），后期">
-<meta property="og:type" content="article">
-<meta property="og:title" content="iOS:webApp客户端开发小记">
-<meta property="og:url" content="https://huangshuai-iot.github.io/2015/11/05/iOS-webApp客户端开发小记/index.html">
-<meta property="og:site_name" content="黄帅的博客">
-<meta property="og:description" content="这篇文章，现在是我写的第二遍，因为就在我刚才准备commit的时候，手贱点了sync，结果白写了一个小时。
-
-前言暑期以来我一直在一家物联网公司实习，刚来的时候开发了一款物联网云服务的iOS客户端，也许你会问为啥一个实习生刚来就开发产品，主要原因是我能力超强，还有一个很小的原因是全公司就我用Mac，并且会点点Swift，哈哈。
-刚来是开发一款物联网应用的iOS客户端（1.0版本现在已上线），后期">
-<meta property="og:updated_time" content="2016-08-09T08:39:46.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS:webApp客户端开发小记">
-<meta name="twitter:description" content="这篇文章，现在是我写的第二遍，因为就在我刚才准备commit的时候，手贱点了sync，结果白写了一个小时。
-
-前言暑期以来我一直在一家物联网公司实习，刚来的时候开发了一款物联网云服务的iOS客户端，也许你会问为啥一个实习生刚来就开发产品，主要原因是我能力超强，还有一个很小的原因是全公司就我用Mac，并且会点点Swift，哈哈。
-刚来是开发一款物联网应用的iOS客户端（1.0版本现在已上线），后期">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: 'Author'
+    version: '7.1.2',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
-
-
-  <link rel="canonical" href="https://huangshuai-iot.github.io/2015/11/05/iOS-webApp客户端开发小记/"/>
-
-  <title> iOS:webApp客户端开发小记 | 黄帅的博客 </title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
 
-  <script type="text/javascript">
+
+  <meta name="description" content="这篇文章，现在是我写的第二遍，因为就在我刚才准备commit的时候，手贱点了sync，结果白写了一个小时。  前言暑期以来我一直在一家物联网公司实习，刚来的时候开发了一款物联网云服务的iOS客户端，也许你会问为啥一个实习生刚来就开发产品，主要原因是我能力超强，还有一个很小的原因是全公司就我用Mac，并且会点点Swift，哈哈。 刚来是开发一款物联网应用的iOS客户端（1.0版本现在已上线），后期">
+<meta name="keywords" content="Swift,iOS,UIWebView,二维码扫描">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS:webApp客户端开发小记">
+<meta property="og:url" content="https://huangshuai-iot.github.io/2015/11/05/iOS-webApp客户端开发小记/index.html">
+<meta property="og:site_name" content="黄帅的博客">
+<meta property="og:description" content="这篇文章，现在是我写的第二遍，因为就在我刚才准备commit的时候，手贱点了sync，结果白写了一个小时。  前言暑期以来我一直在一家物联网公司实习，刚来的时候开发了一款物联网云服务的iOS客户端，也许你会问为啥一个实习生刚来就开发产品，主要原因是我能力超强，还有一个很小的原因是全公司就我用Mac，并且会点点Swift，哈哈。 刚来是开发一款物联网应用的iOS客户端（1.0版本现在已上线），后期">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-16T15:37:13.551Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS:webApp客户端开发小记">
+<meta name="twitter:description" content="这篇文章，现在是我写的第二遍，因为就在我刚才准备commit的时候，手贱点了sync，结果白写了一个小时。  前言暑期以来我一直在一家物联网公司实习，刚来的时候开发了一款物联网云服务的iOS客户端，也许你会问为啥一个实习生刚来就开发产品，主要原因是我能力超强，还有一个很小的原因是全公司就我用Mac，并且会点点Swift，哈哈。 刚来是开发一款物联网应用的iOS客户端（1.0版本现在已上线），后期">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://huangshuai-iot.github.io/2015/11/05/iOS-webApp客户端开发小记/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>iOS:webApp客户端开发小记 | 黄帅的博客</title>
+  
+
+
+
+
+
+
+  <script>
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?de241358bbb90d3e97f1f8486e6d5b41";
+      hm.src = "https://hm.baidu.com/hm.js?de241358bbb90d3e97f1f8486e6d5b41";
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(hm, s);
     })();
@@ -151,144 +146,233 @@
 
 
 
-  <div style="display: none;">
-    <script src="//s6.cnzz.com/stat.php?id=1259995403&web_id=1259995403" type="text/javascript"></script>
-  </div>
 
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
 
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">黄帅的博客</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">黄帅的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
   </div>
-  <p class="site-subtitle">Just I decided.</p>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
+
 
 <nav class="site-nav">
-  
-
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
       
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
       
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>Sitemap</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
+
+  </li>
 
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="st-search-show-outputs">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
       
     </ul>
   
 
   
-    <div class="site-search">
-      
-  <form class="site-search-form">
-  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-</form>
+    
 
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+  
 
-  _st('install', 'yQ1raifaH1s316jSamV8','2.0.0');
-</script>
-
-
-
-    </div>
   
 </nav>
 
- </div>
+
+
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
           <div id="content" class="content">
             
 
@@ -296,24 +380,37 @@
     
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://huangshuai-iot.github.io/2015/11/05/iOS-webApp客户端开发小记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄帅">
+      <meta itemprop="description" content="说我能做的，做我说过的">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="黄帅的博客">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                iOS:webApp客户端开发小记
+          <h1 class="post-title" itemprop="name headline">iOS:webApp客户端开发小记
+
               
             
           </h1>
@@ -321,70 +418,93 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-05T17:00:15+08:00" content="2015-11-05">
-              2015-11-05
-            </time>
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2015-11-05 17:00:15" itemprop="dateCreated datePublished" datetime="2015-11-05T17:00:15+08:00">2015-11-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-16 23:37:13" itemprop="dateModified" datetime="2019-06-16T23:37:13+08:00">2019-06-16</time>
+              
+            
           </span>
 
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/开发/" itemprop="url" rel="index">
-                    <span itemprop="name">开发</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
+                <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/开发/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/开发/" itemprop="url" rel="index"><span itemprop="name">开发</span></a></span>
 
                 
                 
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/开发/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
 
+                
+                
               
             </span>
           
 
           
             
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/11/05/iOS-webApp客户端开发小记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2015/11/05/iOS-webApp客户端开发小记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
             
           
 
           
-
-          
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -395,7 +515,7 @@
 <p>这篇文章，现在是我写的第二遍，因为就在我刚才准备commit的时候，手贱点了sync，结果白写了一个小时。</p>
 </blockquote>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>暑期以来我一直在一家物联网公司实习，刚来的时候开发了一款物联网云服务的iOS客户端，也许你会问为啥一个实习生刚来就开发产品，主要原因是我能力超强，还有一个很小的原因是全公司就我用Mac，并且会点点Swift，哈哈。</p>
-<p>刚来是开发一款物联网应用的iOS客户端（<a href="https://itunes.apple.com/us/app/iotcloud/id1045360550?l=zh&amp;ls=1&amp;mt=8" target="_blank" rel="external">1.0版本</a>现在已上线），后期开发了一段时间这个产品的后台，主要是MongoDB和Java Web。之后，我又被叫去开发另一款云教育应用的iOS客户端和Android客户端。这篇文章主要介绍的是开发这两款iOS应用的总结，后期会总结一下在Android上实现同样功能的经验。</p>
+<p>刚来是开发一款物联网应用的iOS客户端（<a href="https://itunes.apple.com/us/app/iotcloud/id1045360550?l=zh&ls=1&mt=8" target="_blank" rel="noopener">1.0版本</a>现在已上线），后期开发了一段时间这个产品的后台，主要是MongoDB和Java Web。之后，我又被叫去开发另一款云教育应用的iOS客户端和Android客户端。这篇文章主要介绍的是开发这两款iOS应用的总结，后期会总结一下在Android上实现同样功能的经验。</p>
 <p>我们公司的产品都是前端是采用HTML5的，这样每个平台的客户端只要套个UIWebView的壳子就好。但是问题不是全部网页都是从服务器端加载的，因为不能保证网络一直畅通，以及服务器没有错，要是网络不通，那整个应用就是一片空白，这样的体验太差了。</p>
 <p>所以我们的想法是欢迎页、登陆页都是本地的资源，这样应用打开，不管服务器啥情况，用户都是可以看见东西的。</p>
 <hr>
@@ -414,27 +534,32 @@
 <li><p>Xcode7导入本地资源<br>之前用的是Xcode6，项目下面有一个Supporting Files文件夹，将本地资源导入后都在此文件夹中，升级到Xcode7后，没有这个文件夹了，可以直接将本地资源直接导入项目中。</p>
 </li>
 <li><p>iOS9网络连接问题<br>刚开始用Xcode6开发第一项目的时候，UIWebView联网是没有问题的，第二个项目使用的是Xcode7和iOS9，就连打开baidu都无法实现，控制台会报错:<br>当时在Stack Overflow找到原因了:</p>
- <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="type">Application</span> <span class="type">Transport</span> <span class="type">Security</span> has blocked a cleartext <span class="type">HTTP</span> (http:<span class="comment">//) resource load since it is insecure. Temporary exceptions can be configured via your app's Info.plist file.</span></div></pre></td></tr></table></figure>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Application</span> <span class="type">Transport</span> <span class="type">Security</span> has blocked a cleartext <span class="type">HTTP</span> (http:<span class="comment">//) resource load since it is insecure. Temporary exceptions can be configured via your app's Info.plist file.</span></span><br></pre></td></tr></table></figure>
+
 <p> <strong>在iOS9 beta1中，苹果将原http协议改成了https协议，使用 TLS1.2 SSL加密请求数据。</strong><br>解决方法就是：在info.plist中添加</p>
- <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;key&gt;<span class="type">NSAppTransportSecurity</span>&lt;/key&gt;</div><div class="line">&lt;dict&gt;&lt;key&gt;<span class="type">NSAllowsArbitraryLoads</span>&lt;/key&gt;&lt;<span class="literal">true</span>/&gt;&lt;/dict&gt;</div></pre></td></tr></table></figure>
-<p> 后来在<a href="http://www.infoq.com/cn/articles/wechat-ios9-adaptation" target="_blank" rel="external">《微信在适配iOS9上遇到的问题和解决方案》</a>也看到了该问题的解决方法。</p>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;key&gt;<span class="type">NSAppTransportSecurity</span>&lt;/key&gt;</span><br><span class="line">&lt;dict&gt;&lt;key&gt;<span class="type">NSAllowsArbitraryLoads</span>&lt;/key&gt;&lt;<span class="literal">true</span>/&gt;&lt;/dict&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 后来在<a href="http://www.infoq.com/cn/articles/wechat-ios9-adaptation" target="_blank" rel="noopener">《微信在适配iOS9上遇到的问题和解决方案》</a>也看到了该问题的解决方法。</p>
 </li>
 <li><p>UIWebView加载本地资源</p>
 <p> 我做的项目中，主要是UIWebView加载本地的网页，代码如下：</p>
- <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> path = <span class="type">NSBundle</span>.mainBundle().pathForResource(<span class="string">"index"</span>, ofType: <span class="string">"htm"</span>)</div><div class="line"><span class="keyword">let</span> urlobj = <span class="type">NSURL</span>.fileURLWithPath(path!)</div><div class="line"><span class="keyword">let</span> request = <span class="type">NSURLRequest</span>(<span class="type">URL</span>: urlobj)</div><div class="line">myWebView.loadRequest(request)</div></pre></td></tr></table></figure>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> path = <span class="type">NSBundle</span>.mainBundle().pathForResource(<span class="string">"index"</span>, ofType: <span class="string">"htm"</span>)</span><br><span class="line"><span class="keyword">let</span> urlobj = <span class="type">NSURL</span>.fileURLWithPath(path!)</span><br><span class="line"><span class="keyword">let</span> request = <span class="type">NSURLRequest</span>(<span class="type">URL</span>: urlobj)</span><br><span class="line">myWebView.loadRequest(request)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>从网页跳转回本地</p>
 <p> 前面说到项目的两个功能：一是网页调用本地二维码；二是在网页里退出，本地能清除登录数据。</p>
 <p> 我的解决思路是：web应用中，需要跳转本地的功能，都把链接写成固定格式的</p>
- <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"m://erweima.com/"</span> <span class="attr">class</span>=<span class="string">"link_btn link_btn_t"</span>&gt;</span>二维码扫描<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"m://erweima.com/"</span> <span class="attr">class</span>=<span class="string">"link_btn link_btn_t"</span>&gt;</span>二维码扫描<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p> UIWebView中有一个方法，可以在链接地址改变时触发，我就是利用该方法，判断UIWebView即将要跳转的链接地址，如果是事先确定的，则执行本地相关操作，如上所述的二维码操作：</p>
- <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">webView</span><span class="params">(webView: UIWebView,shouldStartLoadWithRequest request: NSURLRequest,navigationType: UIWebViewNavigationType)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">let</span> rurl = request.<span class="type">URL</span></div><div class="line">    <span class="keyword">if</span>(rurl!.scheme == <span class="string">"m"</span> &amp;&amp; rurl!.host == <span class="string">"erweima.com"</span>) &#123; </div><div class="line">    <span class="comment">//启动二维码扫描</span></div><div class="line">    tiaozhuan()</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//返回true就会跳转新地址</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">webView</span><span class="params">(webView: UIWebView,shouldStartLoadWithRequest request: NSURLRequest,navigationType: UIWebViewNavigationType)</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> rurl = request.<span class="type">URL</span></span><br><span class="line">    <span class="keyword">if</span>(rurl!.scheme == <span class="string">"m"</span> &amp;&amp; rurl!.host == <span class="string">"erweima.com"</span>) &#123; </span><br><span class="line">    <span class="comment">//启动二维码扫描</span></span><br><span class="line">    tiaozhuan()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回true就会跳转新地址</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>二维码扫描功能</p>
-<p> 这里用到一个用Swift2和AVFoundation写的二维码扫描的类<a href="https://github.com/Recursion0210/QRCode" target="_blank" rel="external">github</a>，类里用的是UIStoryBoard进行跳转的，我稍微改动了一下，用方法调用的：</p>
- <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">tiaozhuan</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">let</span> scannerVC:<span class="type">ScannerViewController</span> = <span class="type">ScannerViewController</span>()</div><div class="line">    scannerVC.delegate = <span class="keyword">self</span></div><div class="line">    <span class="keyword">self</span>.presentViewController(scannerVC, animated: <span class="literal">false</span>, completion: <span class="literal">nil</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 这里用到一个用Swift2和AVFoundation写的二维码扫描的类<a href="https://github.com/Recursion0210/QRCode" target="_blank" rel="noopener">github</a>，类里用的是UIStoryBoard进行跳转的，我稍微改动了一下，用方法调用的：</p>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">tiaozhuan</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> scannerVC:<span class="type">ScannerViewController</span> = <span class="type">ScannerViewController</span>()</span><br><span class="line">    scannerVC.delegate = <span class="keyword">self</span></span><br><span class="line">    <span class="keyword">self</span>.presentViewController(scannerVC, animated: <span class="literal">false</span>, completion: <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p> ViewController继承了<code>ScannerViewControllerDelegate</code>协议，实现了：</p>
- <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">barcodeObtained</span><span class="params">(viewController:ScannerViewController, data: String)</span></span> &#123;</div><div class="line">    <span class="comment">//打印二维码扫描的结果</span></div><div class="line">    <span class="built_in">print</span>(data)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">barcodeObtained</span><span class="params">(viewController:ScannerViewController, data: String)</span></span> &#123;</span><br><span class="line">    <span class="comment">//打印二维码扫描的结果</span></span><br><span class="line">    <span class="built_in">print</span>(data)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 <hr>
@@ -442,71 +567,58 @@
 <p>今天周三，是光棍节，周一做的是Android和iOS的判断网络状态的功能，周二和今天上午做的是Android的即时通讯和实时音视频功能，今天下午做的是iOS的即时通讯功能，由于SDK用的是OC，而我用的是Swift，所以到现在也没搞出来啥，还好项目不急，所以来更新一下博客。</p>
 <p>2015-11-11 17:55</p>
 <hr>
-<ol>
+<ol start="6">
 <li><p>判断网络状态</p>
 <h5 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h5><p>是这样的，由于产品登陆完之后，全部内容都在UIWebView中，要是网络突然断了，就会显示无法连接界面，这样用户体验不好，如果后面能联网了，又不能返回到断网之前的界面。</p>
 <h5 id="需求："><a href="#需求：" class="headerlink" title="需求："></a>需求：</h5><p>在尽量不改后台的情况下，解决上面的问题</p>
 <h5 id="解决思路："><a href="#解决思路：" class="headerlink" title="解决思路："></a>解决思路：</h5><p>在每次需要跳转之前，先判断一下网络状态，若是可以联网则不处理；若不能联网，则存储当前链接，并跳转到本地一个不能联网的界面，该界面上有刷新按钮，通过不断点击刷新按钮来重复跳转该界面，然后可以判断网络情况，若可以联网了，则加载之前存储的链接。</p>
-<p>上面的逻辑代码就不贴了，没有参考意义，反正就是在上面第四点的webView方法中进行处理。这里我放一个判断网络状态的项目地址<a href="https://github.com/ashleymills/Reachability.swift" target="_blank" rel="external">Reachability.swift-github</a></p>
+<p>上面的逻辑代码就不贴了，没有参考意义，反正就是在上面第四点的webView方法中进行处理。这里我放一个判断网络状态的项目地址<a href="https://github.com/ashleymills/Reachability.swift" target="_blank" rel="noopener">Reachability.swift-github</a></p>
 </li>
 <li><p>即时通讯</p>
 <h5 id="问题：-1"><a href="#问题：-1" class="headerlink" title="问题："></a>问题：</h5><p>由于我们的项目是做教育类的，需要用户之间可以进行类似于微信那样的通信功能，并且可以进行实时音、视频通话功能。</p>
 <h5 id="需求：-1"><a href="#需求：-1" class="headerlink" title="需求："></a>需求：</h5><p>实现上述功能，还要尽可能的保证服务质量</p>
-<h5 id="解决思路：-1"><a href="#解决思路：-1" class="headerlink" title="解决思路："></a>解决思路：</h5><p>我想到的方法是集成第三方的服务，目前用的是<a href="http://www.yuntongxun.com/" target="_blank" rel="external">容联云服务</a>。还没做完，未完待续。  </p>
+<h5 id="解决思路：-1"><a href="#解决思路：-1" class="headerlink" title="解决思路："></a>解决思路：</h5><p>我想到的方法是集成第三方的服务，目前用的是<a href="http://www.yuntongxun.com/" target="_blank" rel="noopener">容联云服务</a>。还没做完，未完待续。  </p>
 </li>
 </ol>
 
       
     </div>
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
+    
+    
 
-    <div>
-      
-        
-  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
-    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-      <span>赏</span>
-    </button>
-    <div id="QR" style="display: none;">
-      
-        <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="/uploads/wechat-reward-image.JPG" alt="黄帅 WeChat Pay"/>
-          <p>微信打赏</p>
-        </div>
-      
-      
-        <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="/uploads/alipay-reward-image.JPG" alt="黄帅 Alipay"/>
-          <p>支付宝打赏</p>
-        </div>
-      
-    </div>
-  </div>
+    
 
-
+    
       
-    </div>
+    
+    
+
+    
 
     <footer class="post-footer">
       
+        
+          
+        
         <div class="post-tags">
           
-            <a href="/tags/Swift/" rel="tag">#Swift</a>
+            <a href="/tags/Swift/" rel="tag"># Swift</a>
           
-            <a href="/tags/iOS/" rel="tag">#iOS</a>
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
           
-            <a href="/tags/UIWebView/" rel="tag">#UIWebView</a>
+            <a href="/tags/UIWebView/" rel="tag"># UIWebView</a>
           
-            <a href="/tags/二维码扫描/" rel="tag">#二维码扫描</a>
+            <a href="/tags/二维码扫描/" rel="tag"># 二维码扫描</a>
           
         </div>
+      
+
+      
+      
       
 
       
@@ -519,10 +631,12 @@
             
           </div>
 
+          <span class="post-nav-divider"></span>
+
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/02/阿里百川即时通讯功能-iOS开发/" rel="prev" title="iOS:阿里百川即时通讯功能">
-                iOS:阿里百川即时通讯功能 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/12/02/iOS9-Swift2-Xcode7的APNS使用/" rel="prev" title="iOS Swift Xcode7 的 APNS 使用">
+                iOS Swift Xcode7 的 APNS 使用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -532,31 +646,21 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
           </div>
           
 
+  
 
-          
-  <div class="comments" id="comments">
-    
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
-  </div>
 
 
         </div>
@@ -578,133 +682,181 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar-hus.jpg"
-               alt="黄帅" />
-          <p class="site-author-name" itemprop="name">黄帅</p>
-          <p class="site-description motion-element" itemprop="description">说我能做的，做我说过的。</p>
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">黄帅</p>
+              <div class="site-description motion-element" itemprop="description">说我能做的，做我说过的</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
         </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">16</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          
-            <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">8</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">29</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/u/2189929640" target="_blank" title="微博">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  微博
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/huangshuai-IOT" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              友情链接
-            </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="https://yuhaomin.github.io" title="女票的博客😘" target="_blank">女票的博客😘</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://52chat.cc/" title="松哥的论坛" target="_blank">松哥的论坛</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="https://eliyar.biz/" title="Eliyar's Blog" target="_blank">Eliyar's Blog</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://swifter.tips/" title="Swifter Tips" target="_blank">Swifter Tips</a>
-                </li>
-              
-            </ul>
-          </div>
-        
-
-      </section>
+      </div>
 
       
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
-              
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用逻辑"><span class="nav-number">2.</span> <span class="nav-text">应用逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题以及解决方法"><span class="nav-number">3.</span> <span class="nav-text">遇到的问题以及解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#问题："><span class="nav-number">3.0.0.1.</span> <span class="nav-text">问题：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#需求："><span class="nav-number">3.0.0.2.</span> <span class="nav-text">需求：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决思路："><span class="nav-number">3.0.0.3.</span> <span class="nav-text">解决思路：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题：-1"><span class="nav-number">3.0.0.4.</span> <span class="nav-text">问题：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#需求：-1"><span class="nav-number">3.0.0.5.</span> <span class="nav-text">需求：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决思路：-1"><span class="nav-number">3.0.0.6.</span> <span class="nav-text">解决思路：</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用逻辑"><span class="nav-number">2.</span> <span class="nav-text">应用逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题以及解决方法"><span class="nav-number">3.</span> <span class="nav-text">遇到的问题以及解决方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#问题："><span class="nav-number">3.0.0.1.</span> <span class="nav-text">问题：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#需求："><span class="nav-number">3.0.0.2.</span> <span class="nav-text">需求：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决思路："><span class="nav-number">3.0.0.3.</span> <span class="nav-text">解决思路：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#问题：-1"><span class="nav-number">3.0.0.4.</span> <span class="nav-text">问题：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#需求：-1"><span class="nav-number">3.0.0.5.</span> <span class="nav-text">需求：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#解决思路：-1"><span class="nav-number">3.0.0.6.</span> <span class="nav-text">解决思路：</span></a></li></ol></li></ol></div>
+            
+
           </div>
-        </section>
+        </div>
+      <!--/noindex-->
+      
+
       
 
     </div>
   </aside>
+  
 
 
         
@@ -713,45 +865,61 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2015 - 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">黄帅</span>
+
+  
+
+  
 </div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
-</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
 
-<div>
-<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1259995403'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1259995403%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
-</div>
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.2</div>
+
+
+
 
         
+
+
+
+
+
+
+
 
         
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
   </div>
 
   
 
-<script type="text/javascript">
+<script>
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
     window.Promise = null;
   }
@@ -765,85 +933,99 @@
 
 
 
-  
 
 
 
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
-  
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+
+
+
 
 
 
   
-  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
 
 
 
   
 
 
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
 
   
 
-    <script type="text/javascript">
-      var disqus_shortname = 'https-huangshuai-iot-github-io';
-      var disqus_identifier = '2015/11/05/iOS-webApp客户端开发小记/';
-      var disqus_title = "iOS:webApp客户端开发小记";
-      var disqus_url = 'https://huangshuai-iot.github.io/2015/11/05/iOS-webApp客户端开发小记/';
+  
 
-      function run_disqus_script(disqus_script){
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
+  
 
-      run_disqus_script('count.js');
-      
-        run_disqus_script('embed.js');
-      
-    </script>
+  
+
+
+  
+
+
   
 
 
 
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
   
 
   
