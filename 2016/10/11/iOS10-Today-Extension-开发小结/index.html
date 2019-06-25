@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.2',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="背景9.15号中秋节那天发布了师大助手App后，就在想还加点什么功能。后来想到了可以在 Today Widgets 里面加一个今日课程，于是就开始动手做了。先给大家看一下最终效果：一开始开发的时候，还是 Xcode7 和 Swift2 ，等到准备上架审核的时候，Xcode8 正式版发布了，然后就做了 Swift3 迁移和 iOS10 适配。 步骤Part1 基本搭建 新建 iOS Project">
+<meta name="keywords" content="Swift,Alamofire,Today-Extension">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS10 Today Extension 开发小结 ">
+<meta property="og:url" content="https://huangshuai-iot.github.io/2016/10/11/iOS10-Today-Extension-开发小结/index.html">
+<meta property="og:site_name" content="黄帅的博客">
+<meta property="og:description" content="背景9.15号中秋节那天发布了师大助手App后，就在想还加点什么功能。后来想到了可以在 Today Widgets 里面加一个今日课程，于是就开始动手做了。先给大家看一下最终效果：一开始开发的时候，还是 Xcode7 和 Swift2 ，等到准备上架审核的时候，Xcode8 正式版发布了，然后就做了 Swift3 迁移和 iOS10 适配。 步骤Part1 基本搭建 新建 iOS Project">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://7xqj7o.com1.z0.glb.clouddn.com/blog/Blog_Widgets_1">
+<meta property="og:image" content="http://7xqj7o.com1.z0.glb.clouddn.com/blog/Blog_Widgets_2">
+<meta property="og:image" content="http://7xqj7o.com1.z0.glb.clouddn.com/blog/Blog_Widgets_3.png">
+<meta property="og:updated_time" content="2019-06-16T15:37:13.551Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS10 Today Extension 开发小结 ">
+<meta name="twitter:description" content="背景9.15号中秋节那天发布了师大助手App后，就在想还加点什么功能。后来想到了可以在 Today Widgets 里面加一个今日课程，于是就开始动手做了。先给大家看一下最终效果：一开始开发的时候，还是 Xcode7 和 Swift2 ，等到准备上架审核的时候，Xcode8 正式版发布了，然后就做了 Swift3 迁移和 iOS10 适配。 步骤Part1 基本搭建 新建 iOS Project">
+<meta name="twitter:image" content="http://7xqj7o.com1.z0.glb.clouddn.com/blog/Blog_Widgets_1">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://huangshuai-iot.github.io/2016/10/11/iOS10-Today-Extension-开发小结/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>iOS10 Today Extension 开发小结  | 黄帅的博客</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?de241358bbb90d3e97f1f8486e6d5b41";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">黄帅的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>Sitemap</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://huangshuai-iot.github.io/2016/10/11/iOS10-Today-Extension-开发小结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄帅">
+      <meta itemprop="description" content="说我能做的，做我说过的">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="黄帅的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS10 Today Extension 开发小结 
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-10-11 17:30:20" itemprop="dateCreated datePublished" datetime="2016-10-11T17:30:20+08:00">2016-10-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-16 23:37:13" itemprop="dateModified" datetime="2019-06-16T23:37:13+08:00">2019-06-16</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/开发/" itemprop="url" rel="index"><span itemprop="name">开发</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/开发/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>9.15号中秋节那天发布了<a href="https://itunes.apple.com/us/app/shi-da-zhu-shou-hui-shi-fan/id1150983683?l=zh&ls=1&mt=8" target="_blank" rel="noopener">师大助手App</a>后，就在想还加点什么功能。后来想到了可以在 Today Widgets 里面加一个今日课程，于是就开始动手做了。先给大家看一下最终效果：<br><img src="http://7xqj7o.com1.z0.glb.clouddn.com/blog/Blog_Widgets_1" alt="最终效果"><br>一开始开发的时候，还是 Xcode7 和 Swift2 ，等到准备上架审核的时候，Xcode8 正式版发布了，然后就做了 Swift3 迁移和 iOS10 适配。</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="Part1-基本搭建"><a href="#Part1-基本搭建" class="headerlink" title="Part1 基本搭建"></a>Part1 基本搭建</h3><ol>
+<li>新建 iOS Project ，这就不用说了哈</li>
+<li>新建一个 Target ，选择 Today-Extension ，Target名字就设置为 TodayWidget</li>
+<li>在 MainInterface.storyboard 画 UI ，然后运行就可以看到效果了，由于我是显示课程，就在里面添加了一个 UITableView ，并且增加了两个 Prototype Cell 用于自定义Cell</li>
+</ol>
+<h3 id="Part2-依赖项目引入"><a href="#Part2-依赖项目引入" class="headerlink" title="Part2 依赖项目引入"></a>Part2 依赖项目引入</h3><ol>
+<li><p>在 Podfile 项目中新建一个target，并加入需要引入的项目，代码如下：</p>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">target '<span class="type">TodayWidget'</span> <span class="keyword">do</span></span><br><span class="line">  pod '<span class="type">YYModel'</span></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在 TodayWidget Target 下面新建一个桥接头文件，这里为省去设置的头文件的方法，可以直接新建oc文件，xcode会问你要不要自动添加一个桥接头文件，建好之后删除oc文件即可</p>
+</li>
+<li><p>接下来在测试过程中，我们就可以愉快的通过 Cocoapods 使用第三方库了，但是提交代码到AppStore就会报如下的错误了：<br> <img src="http://7xqj7o.com1.z0.glb.clouddn.com/blog/Blog_Widgets_2" alt="上传报错"></p>
+</li>
+<li><p>解决targets不能使用Cocoapods的方法是：在TodayWidget -&gt; Build Phases -&gt; New Run Script Phase ，再添加如下代码</p>
+ <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="string">"$&#123;CONFIGURATION_BUILD_DIR&#125;/$&#123;UNLOCALIZED_RESOURCES_FOLDER_PATH&#125;/"</span></span><br><span class="line"><span class="keyword">if</span> [[ -d <span class="string">"Frameworks"</span> ]]; then</span><br><span class="line">rm -fr <span class="type">Frameworks</span></span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这样就可以顺利提交到AppStore了</p>
+</li>
+</ol>
+<h3 id="Part3-TodayExtension-Target-和-main-Target-之间数据共享"><a href="#Part3-TodayExtension-Target-和-main-Target-之间数据共享" class="headerlink" title="Part3 TodayExtension Target 和 main Target 之间数据共享"></a>Part3 TodayExtension Target 和 main Target 之间数据共享</h3><p>在讲如何具体实现数据共享之前，需要先打开两个Target -&gt; Capabilities -&gt; App Groups，只有在同一个Groups内的target才能共同读写数据。<br><img src="http://7xqj7o.com1.z0.glb.clouddn.com/blog/Blog_Widgets_3.png" alt="设置Group"><br>有两种解决方式：UserDefaults 和 FileManager </p>
+<h4 id="Solution1-UserDefaults方式"><a href="#Solution1-UserDefaults方式" class="headerlink" title="Solution1  UserDefaults方式"></a>Solution1  UserDefaults方式</h4><p>UserDefaults Apple 官方文档：</p>
+<blockquote>
+<p>The NSUserDefaults class provides a programmatic interface for interacting with the defaults system. The defaults system allows an application to customize its behavior to match a user’s preferences. For example, you can allow users to determine what units of measurement your application displays or how often documents are automatically saved. Applications record such preferences by assigning values to a set of parameters in a user’s defaults database. The parameters are referred to as defaults since they’re commonly used to determine an application’s default state at startup or the way it acts by default.</p>
+</blockquote>
+<p>在本App中，我需要将当前是第几教学周在 targets 间传递，数据量很小，于是采用了 UserDefaults 方法，代码如下：<br>    <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 写入</span></span><br><span class="line"><span class="type">UserDefaults</span>.<span class="keyword">init</span>(suiteName: <span class="string">"group.com.huangshuai.xxx"</span>)?.<span class="keyword">set</span>(week, forKey: <span class="string">"currentWeek"</span>)</span><br><span class="line"><span class="comment">// 读取</span></span><br><span class="line"><span class="keyword">let</span> currentWeek = <span class="type">UserDefaults</span>.<span class="keyword">init</span>(suiteName: <span class="string">"group.com.huangshuai.xxx"</span>)?.object(forKey: <span class="string">"currentWeek"</span>) <span class="keyword">as</span>? <span class="type">Int</span> ?? <span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>注：这里是 group 间的 UserDefaults 数据共享，而不是平常的单一target下面的 UserDefaults 使用：<br>    <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 写入</span></span><br><span class="line"><span class="type">UserDefaults</span>.standard.<span class="keyword">set</span>(<span class="literal">false</span>, forKey: <span class="string">"isFirstLaunch"</span>)</span><br><span class="line"><span class="comment">// 读取</span></span><br><span class="line"><span class="keyword">let</span> isFirstLaunch = <span class="type">UserDefaults</span>.standard.object(forKey: <span class="string">"isFirstLaunch"</span>) <span class="keyword">as</span>? <span class="type">Bool</span> ?? <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="Solution2-FileManager方式"><a href="#Solution2-FileManager方式" class="headerlink" title="Solution2  FileManager方式"></a>Solution2  FileManager方式</h4><p>FileManager Apple 官方文档：</p>
+<blockquote>
+<p>An FileManager object lets you examine the contents of the file system and make changes to it. The FileManager class provides convenient access to a shared file manager object that is suitable for most types of file-related manipulations. A file manager object is typically your primary mode of interaction with the file system. You use it to locate, create, copy, and move files and directories. You also use it to get information about a file or directory or change some of its attributes.</p>
+</blockquote>
+<p>在本App中，我需要将所有的课表数据在 targets 间传递，数据量较大，于是采用了 FileManager 方法，代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="string">"course.plist"</span></span><br><span class="line"><span class="keyword">let</span> groupPath = <span class="type">FileManager</span>.<span class="keyword">default</span>.containerURL(forSecurityApplicationGroupIdentifier: <span class="string">"group.com.huangshuai.xxx"</span>)</span><br><span class="line"><span class="keyword">let</span> groupPathString = groupPath!.absoluteString.replacingOccurrences(of:<span class="string">"file:///private"</span>, with: <span class="string">""</span>).replacingOccurrences(of:<span class="string">"file:///"</span>, with: <span class="string">""</span>)</span><br><span class="line">destPath = (groupPathString <span class="keyword">as</span> <span class="type">NSString</span>).appendingPathComponent(name).characters.<span class="built_in">split</span>&#123;$<span class="number">0</span> == <span class="string">"."</span>&#125;.<span class="built_in">map</span>(<span class="type">String</span>.<span class="keyword">init</span>).first!</span><br><span class="line"><span class="comment">// 写入</span></span><br><span class="line"><span class="keyword">let</span> dic = [:] <span class="keyword">as</span> <span class="type">NSDictionary</span></span><br><span class="line">dic.write(toFile: destPath, atomically: <span class="literal">true</span>)</span><br><span class="line"><span class="comment">// 读取</span></span><br><span class="line"><span class="keyword">let</span> dict = <span class="type">NSDictionary</span>(contentsOfFile: destPath)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Part4-适配-iOS10-Widgets-新特性"><a href="#Part4-适配-iOS10-Widgets-新特性" class="headerlink" title="Part4 适配 iOS10 Widgets 新特性"></a>Part4 适配 iOS10 Widgets 新特性</h3><h4 id="处理-Widgets-展开-折叠的情况"><a href="#处理-Widgets-展开-折叠的情况" class="headerlink" title="处理 Widgets 展开/折叠的情况"></a>处理 Widgets 展开/折叠的情况</h4><p>在 iOS10 之前，Widgets 的高度可以自定义设置，但是在 iOS10 中，Widgets 的 activeDisplayMode 有两种状态：.expanded 和 .compact。 需要根据当前用户的选择来处理 Widgets 的高度，代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@available</span>(iOSApplicationExtension <span class="number">10.0</span>, *)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">widgetActiveDisplayModeDidChange</span><span class="params">(<span class="number">_</span> activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> activeDisplayMode == .compact &#123;</span><br><span class="line">        <span class="keyword">self</span>.preferredContentSize = maxSize</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">self</span>.preferredContentSize = <span class="keyword">self</span>.tableView.contentSize</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里有个Bug：就是在 .compact 下无法设置尺寸，不管怎么设置都是 maxsize。还有待解决。</p>
+<h4 id="处理-Widgets-在-iOS9-和-iOS10-下的显示-Bug"><a href="#处理-Widgets-在-iOS9-和-iOS10-下的显示-Bug" class="headerlink" title="处理 Widgets 在 iOS9 和 iOS10 下的显示 Bug"></a>处理 Widgets 在 iOS9 和 iOS10 下的显示 Bug</h4><p>在 iOS10 中，Widgets 的背景是白色的，于是字体颜色设置为黑色的，但是在 iOS9 中，背景是黑色的，App 在iOS9中运行就会看不见字。感觉这是iOS10适配的Bug，为了解决这个问题，只能通过判断系统版本来设置字体颜色了，代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> #available(iOSApplicationExtension <span class="number">10.0</span>, *) &#123;</span><br><span class="line">    mainTextColor = <span class="type">UIColor</span>.black</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    mainTextColor = <span class="type">UIColor</span>.white</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Bug"><a href="#Bug" class="headerlink" title="Bug:"></a>Bug:</h4><p>在 iOS10 下，Widgets 的 displayBundleName 设置也不起作用了，不管怎么设置只跟 mainTarget 的displayBundleName 一致，还未找到解决方法。</p>
+<h2 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h2><p>女票说她们学校课程很多，每天看课表不方便，在国庆节陪她过生日的时候，现场撸了一个App只供她使用，她每次不用解锁直接下拉Widgets就可以看到今日课程，她开心的不得了还发了朋友圈炫耀一番。哈哈，女票是第一生产力☺️</p>
+<p>说到这，本文也就结束了，以上提到的Bug，我会在解决之后再来更新代码。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag"># Swift</a>
+          
+            <a href="/tags/Alamofire/" rel="tag"># Alamofire</a>
+          
+            <a href="/tags/Today-Extension/" rel="tag"># Today-Extension</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/08/Swift3-迁移小结/" rel="next" title="Swift3 迁移小结">
+                <i class="fa fa-chevron-left"></i> Swift3 迁移小结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/29/阿里百川用户反馈Swift开发小结/" rel="prev" title="阿里百川用户反馈Swift开发小结">
+                阿里百川用户反馈Swift开发小结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">黄帅</p>
+              <div class="site-description motion-element" itemprop="description">说我能做的，做我说过的</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">2.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Part1-基本搭建"><span class="nav-number">2.1.</span> <span class="nav-text">Part1 基本搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part2-依赖项目引入"><span class="nav-number">2.2.</span> <span class="nav-text">Part2 依赖项目引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part3-TodayExtension-Target-和-main-Target-之间数据共享"><span class="nav-number">2.3.</span> <span class="nav-text">Part3 TodayExtension Target 和 main Target 之间数据共享</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Solution1-UserDefaults方式"><span class="nav-number">2.3.1.</span> <span class="nav-text">Solution1  UserDefaults方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Solution2-FileManager方式"><span class="nav-number">2.3.2.</span> <span class="nav-text">Solution2  FileManager方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Part4-适配-iOS10-Widgets-新特性"><span class="nav-number">2.4.</span> <span class="nav-text">Part4 适配 iOS10 Widgets 新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#处理-Widgets-展开-折叠的情况"><span class="nav-number">2.4.1.</span> <span class="nav-text">处理 Widgets 展开/折叠的情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#处理-Widgets-在-iOS9-和-iOS10-下的显示-Bug"><span class="nav-number">2.4.2.</span> <span class="nav-text">处理 Widgets 在 iOS9 和 iOS10 下的显示 Bug</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bug"><span class="nav-number">2.4.3.</span> <span class="nav-text">Bug:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#番外篇"><span class="nav-number">3.</span> <span class="nav-text">番外篇</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黄帅</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

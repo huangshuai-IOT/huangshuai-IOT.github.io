@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.2',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="背景过完年在学校度过大学的最后一学期，期间加深学习了Python的Django和iOS开发。在学习的过程中，就想着临走前做一个校园应用。由于我们的需要的信息分散在学校各个部门的系统中，此时就需要通过模拟登陆来获取我们想要的信息。一开始是用python来模拟登陆解析数据的，后期由于我对架构设计的改变（主要是服务器资源和流量没钱买😂），我把很多解析放在手机端（暂时为iOS端）来处理，所以就应运而出本">
+<meta name="keywords" content="Swift,Alamofire,模拟登陆">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 模拟登陆小结">
+<meta property="og:url" content="https://huangshuai-iot.github.io/2016/08/02/Swift模拟登陆小结/index.html">
+<meta property="og:site_name" content="黄帅的博客">
+<meta property="og:description" content="背景过完年在学校度过大学的最后一学期，期间加深学习了Python的Django和iOS开发。在学习的过程中，就想着临走前做一个校园应用。由于我们的需要的信息分散在学校各个部门的系统中，此时就需要通过模拟登陆来获取我们想要的信息。一开始是用python来模拟登陆解析数据的，后期由于我对架构设计的改变（主要是服务器资源和流量没钱买😂），我把很多解析放在手机端（暂时为iOS端）来处理，所以就应运而出本">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-16T15:37:13.550Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 模拟登陆小结">
+<meta name="twitter:description" content="背景过完年在学校度过大学的最后一学期，期间加深学习了Python的Django和iOS开发。在学习的过程中，就想着临走前做一个校园应用。由于我们的需要的信息分散在学校各个部门的系统中，此时就需要通过模拟登陆来获取我们想要的信息。一开始是用python来模拟登陆解析数据的，后期由于我对架构设计的改变（主要是服务器资源和流量没钱买😂），我把很多解析放在手机端（暂时为iOS端）来处理，所以就应运而出本">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://huangshuai-iot.github.io/2016/08/02/Swift模拟登陆小结/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Swift 模拟登陆小结 | 黄帅的博客</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?de241358bbb90d3e97f1f8486e6d5b41";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">黄帅的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-schedule">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>Schedule</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>Sitemap</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://huangshuai-iot.github.io/2016/08/02/Swift模拟登陆小结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="黄帅">
+      <meta itemprop="description" content="说我能做的，做我说过的">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="黄帅的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Swift 模拟登陆小结
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-08-02 18:27:36" itemprop="dateCreated datePublished" datetime="2016-08-02T18:27:36+08:00">2016-08-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-06-16 23:37:13" itemprop="dateModified" datetime="2019-06-16T23:37:13+08:00">2019-06-16</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/开发/" itemprop="url" rel="index"><span itemprop="name">开发</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/开发/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>过完年在学校度过大学的最后一学期，期间加深学习了Python的Django和iOS开发。在学习的过程中，就想着临走前做一个校园应用。由于我们的需要的信息分散在学校各个部门的系统中，此时就需要通过模拟登陆来获取我们想要的信息。一开始是用python来模拟登陆解析数据的，后期由于我对架构设计的改变（主要是服务器资源和流量没钱买😂），我把很多解析放在手机端（暂时为iOS端）来处理，所以就应运而出本篇博文。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>要模拟浏览器登陆，首先得分析浏览器登陆的步骤，再用代码来实现。在分析浏览器登陆之前先介绍一下使用到的工具。</p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><h3 id="Charles"><a href="#Charles" class="headerlink" title="Charles"></a>Charles</h3><p>这是一款常用的网络封包截取工具，在做开发时，我们为了调试与服务器端的网络通讯协议，常常需要截取网络封包来分析。Mac和PC都可以使用。今天好像发布了新版了。这个还可以作为iPhone的http代理，来抓包手机的网络包。关于此软件的使用详情，可以阅读<a 11 14 2015 href http: blog.devtang.com charles-introduction "">唐巧老师的博客</a>。</p>
+<h3 id="Postman"><a href="#Postman" class="headerlink" title="Postman"></a>Postman</h3><p>这是Mac上Chrome的一个网络调试的工具插件，PC上不知道有没有，可以通过该工具来进行各种http请求。</p>
+<h3 id="编码工具"><a href="#编码工具" class="headerlink" title="编码工具"></a>编码工具</h3><p>这是一个在线的<a href="http://tool.chinaz.com/tools/urlencode.aspx" target="_blank" rel="noopener">站长工具</a>，可以进行各类编码间的转换，最常用的应该就是utf-8的UrlDecode和UrlEncode。这个工具还非常贴心的提供了gb2312格式的UrlDecode和UrlEncode。</p>
+<h3 id="Alamofire（iOS网络库）"><a href="#Alamofire（iOS网络库）" class="headerlink" title="Alamofire（iOS网络库）"></a>Alamofire（iOS网络库）</h3><ol>
+<li>Alamofire 的前身是 AFNetworking。AFNetworking 是 iOS 和 OS X 上很受欢迎的第三方HTTP网络基础库。</li>
+<li>其实 AFNetwork 的前缀 AF 便是 Alamofire 的缩写。</li>
+<li>Swift发布后，AFNetworking的作者又用Swift语言写了个相同功能的库，这便是 Alamofire。</li>
+<li>Alamofire 本质是基于<code>NSURLSession</code>，并做了封装。使用 Alamofire 可以让我们网络请求相关代码（如获取数据，提交数据，上传文件，下载文件等）更加简洁易用。</li>
+</ol>
+<p><strong>关于Cookie:</strong><br>Alamofire是基于NSURLRequest封装的，所以Cookie会自动保存，就和浏览器请求是一个效果。而且网站Set_cookie多久，本地的Cookie就多久，每次请求的时候都会自动带上cookie，直到过期。（所以像登陆session这些的都不用我们手动去处理）。</p>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>POST请求和GET请求应该就不用解释了，这里提醒一下编码格式，现在大部分服务器都是utf-8编码格式的，但不排除少量用的GB2312。所以在发现服务器响应数据乱码时要检查返回数据的编码格式。</p>
+<h2 id="几个例子"><a href="#几个例子" class="headerlink" title="几个例子"></a>几个例子</h2><h3 id="登陆1"><a href="#登陆1" class="headerlink" title="登陆1"></a>登陆1</h3><p>做校园APP想到的第一个功能就是查成绩查课表，于是第一个就是拿教务系统动刀。</p>
+<p>通过Charles发现，使用网页登陆教务系统的时候，其实是跳转到一个check页验证账号密码，再跳转回教务系统首页。该网页返回的就是JSON数据，所以用的<code>responseJSON</code>。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Alamofire</span>.request(<span class="type">Method</span>.<span class="type">POST</span>, <span class="type">SchoolBaseURL</span>+<span class="string">"login/check.shtml"</span></span><br><span class="line">, parameters:[<span class="string">"user"</span>:<span class="string">"*****"</span>,<span class="string">"pass"</span>:<span class="string">"*****"</span>,<span class="string">"usertype"</span>:<span class="string">"stu"</span>]</span><br><span class="line">, encoding: <span class="type">ParameterEncoding</span>.<span class="type">URL</span></span><br><span class="line">, headers: <span class="literal">nil</span>).responseJSON &#123;</span><br><span class="line">                response <span class="keyword">in</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">guard</span> response.result.isSuccess  <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">self</span>.callback?.managerApiCallBackFailed(<span class="keyword">self</span>)</span><br><span class="line">                <span class="type">Hud</span>.showError(<span class="string">"网络错误了"</span>)</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 登陆成功</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="登陆2"><a href="#登陆2" class="headerlink" title="登陆2"></a>登陆2</h3><p>想到的第二个功能就是查询校园网流量使用情况，于是瞄上了信息管理中心的校园网系统。</p>
+<p>这里请求时必须带上Content-Type和Referer。否则就会跳到登录页。这个系统就是我讲的GB2312编码的坑货系统。返回的data需要经过GB2312编码。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Alamofire</span>.request(<span class="type">Method</span>.<span class="type">POST</span>, <span class="type">SchoolNetWorkBaseURL</span></span><br><span class="line">, parameters:[<span class="string">"username"</span>:<span class="string">"*****"</span>,<span class="string">"password"</span>:<span class="string">"*****"</span>]</span><br><span class="line">, encoding: <span class="type">ParameterEncoding</span>.<span class="type">URL</span></span><br><span class="line">, headers: [<span class="string">"Content-Type"</span>:<span class="string">"application/x-www-form-urlencoded"</span>,<span class="string">"Referer"</span>:<span class="type">SchoolNetWorkBaseURL</span>]).response &#123;</span><br><span class="line">                request, response, data, error <span class="keyword">in</span> </span><br><span class="line">                </span><br><span class="line">                <span class="comment">// 业务处理</span></span><br><span class="line">                <span class="keyword">let</span> <span class="type">GB2312Encoding</span> = <span class="type">CFStringConvertEncodingToNSStringEncoding</span>(<span class="number">0x0632</span>)</span><br><span class="line">                <span class="keyword">let</span> selfHTMLString:<span class="type">String</span> = <span class="type">NSString</span>(data: data!, encoding: <span class="type">GB2312Encoding</span>)! <span class="keyword">as</span> <span class="type">String</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>弄到这里感觉还比较轻松，但是最坑爹的是，这个网站的请求参数必须是经过GB2312的URLEncode。而Alamofire只能将参数进行utf-8编码。我开始时以为将请求参数用GB2312编码后传入即可，或者利用GB2312编码的URLEncode后再传入。但是都相当于Alamofire在最外层还是用UTF-8又URLEncode了一遍。</p>
+<p>这是Alamofire的源码，这里可以由<code>charst=utf-8</code>看出它默认将数据进行utf-8编码。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> method = <span class="type">Method</span>(rawValue: mutableURLRequest.<span class="type">HTTPMethod</span>) <span class="keyword">where</span> encodesParametersInURL(method) &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span></span><br><span class="line">        <span class="type">URLComponents</span> = <span class="type">NSURLComponents</span>(<span class="type">URL</span>: mutableURLRequest.<span class="type">URL!</span>, resolvingAgainstBaseURL: <span class="literal">false</span>)</span><br><span class="line">        <span class="keyword">where</span> !parameters.isEmpty</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">let</span> percentEncodedQuery = (<span class="type">URLComponents</span>.percentEncodedQuery.<span class="built_in">map</span> &#123; $<span class="number">0</span> + <span class="string">"&amp;"</span> &#125; ?? <span class="string">""</span>) + query(parameters)</span><br><span class="line">        <span class="type">URLComponents</span>.percentEncodedQuery = percentEncodedQuery</span><br><span class="line">        mutableURLRequest.<span class="type">URL</span> = <span class="type">URLComponents</span>.<span class="type">URL</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> mutableURLRequest.valueForHTTPHeaderField(<span class="string">"Content-Type"</span>) == <span class="literal">nil</span> &#123;</span><br><span class="line">        mutableURLRequest.setValue(</span><br><span class="line">            <span class="string">"application/x-www-form-urlencoded; charset=utf-8"</span>,</span><br><span class="line">            forHTTPHeaderField: <span class="string">"Content-Type"</span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    mutableURLRequest.<span class="type">HTTPBody</span> = query(parameters).dataUsingEncoding(</span><br><span class="line">        <span class="type">NSUTF8StringEncoding</span>,</span><br><span class="line">        allowLossyConversion: <span class="literal">false</span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里参考学长给的建议，将request先自己编码后再进行传输。首先封装了自定义编码request方法。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">urlRequestWithComponents</span><span class="params">(urlString:String,parameters:[String: AnyObject])</span></span> -&gt; (<span class="type">URLRequestConvertible</span>,<span class="type">NSData</span>) &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// create  url request to send</span></span><br><span class="line">    <span class="keyword">let</span> mutableURLRequest = <span class="type">NSMutableURLRequest</span>(<span class="type">URL</span>: <span class="type">NSURL</span>(string: urlString)!)</span><br><span class="line">    mutableURLRequest.<span class="type">HTTPMethod</span> = <span class="type">Alamofire</span>.<span class="type">Method</span>.<span class="type">POST</span>.rawValue</span><br><span class="line">    <span class="keyword">let</span> contentType = <span class="string">"application/x-www-form-urlencoded"</span></span><br><span class="line">    mutableURLRequest.setValue(contentType, forHTTPHeaderField: <span class="string">"Content-Type"</span>)</span><br><span class="line">    mutableURLRequest.setValue(<span class="string">"http://nic.ahnu.edu.cn/cgi-bin/service"</span>, forHTTPHeaderField: <span class="string">"Referer"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// add parameters</span></span><br><span class="line">    <span class="keyword">let</span> uploadData = <span class="type">NSMutableData</span>()</span><br><span class="line">    <span class="keyword">for</span> (key,value) <span class="keyword">in</span> parameters &#123;</span><br><span class="line">        uploadData.appendData(<span class="string">"\(key)=\(value)&amp;"</span>.dataUsingEncoding(<span class="type">GB2312Encoding</span>)!)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> (<span class="type">Alamofire</span>.<span class="type">ParameterEncoding</span>.<span class="type">URL</span>.encode(mutableURLRequest, parameters: <span class="literal">nil</span>).<span class="number">0</span>,uploadData)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> urlRequest = urlRequestWithComponents(<span class="type">SchoolNetWorkBaseURL</span></span><br><span class="line">, parameters:[<span class="string">"username"</span>:<span class="string">"****"</span>,<span class="string">"credential"</span>:<span class="keyword">self</span>.credential,<span class="string">"logtbl"</span>:<span class="string">"int201607"</span>,<span class="string">"echo"</span>:<span class="string">"查询"</span>,<span class="string">"func"</span>:<span class="string">"计费网关"</span>])</span><br><span class="line"> </span><br><span class="line"><span class="type">Alamofire</span>.upload(urlRequest.<span class="number">0</span>, data: urlRequest.<span class="number">1</span>).response &#123;</span><br><span class="line">    request, response, data, error <span class="keyword">in</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> htmlString:<span class="type">String</span> = <span class="type">NSString</span>(data: data!, encoding: <span class="type">GB2312Encoding</span>)! <span class="keyword">as</span> <span class="type">String</span></span><br><span class="line">    <span class="built_in">print</span>(htmlString)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag"># Swift</a>
+          
+            <a href="/tags/Alamofire/" rel="tag"># Alamofire</a>
+          
+            <a href="/tags/模拟登陆/" rel="tag"># 模拟登陆</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/02/使用Alamofire实现GB2312编码的网络请求/" rel="next" title="Swift 使用 Alamofire 实现 GB2312 编码的网络请求">
+                <i class="fa fa-chevron-left"></i> Swift 使用 Alamofire 实现 GB2312 编码的网络请求
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/09/Swift使用Xib自定义View和Cell/" rel="prev" title="Swift 使用 Xib 自定义 View 和 Cell">
+                Swift 使用 Xib 自定义 View 和 Cell <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">黄帅</p>
+              <div class="site-description motion-element" itemprop="description">说我能做的，做我说过的</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备工作"><span class="nav-number">2.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工具"><span class="nav-number">2.1.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Charles"><span class="nav-number">2.1.1.</span> <span class="nav-text">Charles</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Postman"><span class="nav-number">2.1.2.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编码工具"><span class="nav-number">2.1.3.</span> <span class="nav-text">编码工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Alamofire（iOS网络库）"><span class="nav-number">2.1.4.</span> <span class="nav-text">Alamofire（iOS网络库）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识"><span class="nav-number">2.2.</span> <span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几个例子"><span class="nav-number">2.3.</span> <span class="nav-text">几个例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#登陆1"><span class="nav-number">2.3.1.</span> <span class="nav-text">登陆1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登陆2"><span class="nav-number">2.3.2.</span> <span class="nav-text">登陆2</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">黄帅</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
