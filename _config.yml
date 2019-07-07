@@ -4,11 +4,11 @@
 
 # Site
 title: 黄帅的博客
-subtitle:
+subtitle: 业精于勤，荒于嬉；行成于思，毁于随
 description: 说我能做的，做我说过的
 keywords:
 author: 黄帅
-language: zh-Hans
+language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
@@ -86,3 +86,10 @@ disqus_shortname: https-huangshuai-iot-github-io
 
 # 百度
 baidu_analytics: de241358bbb90d3e97f1f8486e6d5b41
+
+symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: true
+  exclude_codeblock: false
